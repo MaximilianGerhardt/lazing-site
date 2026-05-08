@@ -3340,6 +3340,30 @@ details,
     font-size: 10.5px;
     line-height: 1.35;
   }
+
+  .hero-trust {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .hero-trust span {
+    min-width: 0;
+    justify-content: center;
+    gap: 7px;
+    padding: 5px 8px 5px 6px;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+
+  .hero-trust i {
+    width: 26px;
+    height: 26px;
+  }
+
+  .hero-trust strong {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -3347,7 +3371,7 @@ details,
     width: min(calc(100% - 28px), 1180px);
     min-height: auto;
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 20px;
     padding: 40px 0 34px;
   }
 
@@ -3377,21 +3401,23 @@ details,
 
   .hero-install {
     width: 100%;
-    min-height: 54px;
+    min-height: 98px;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 10px;
-    padding: 7px 7px 7px 14px;
-    border-radius: 28px;
+    align-items: start;
+    gap: 9px 12px;
+    padding: 14px;
+    border-radius: 26px;
   }
 
   .hero-install-repo {
     min-width: 0;
+    align-self: center;
   }
 
   .hero-install code {
     grid-column: 1 / -1;
     grid-row: 2;
-    padding: 0 2px 5px;
+    padding: 2px 0 0;
     font-size: 11px;
     line-height: 1.35;
     white-space: normal;
@@ -3402,36 +3428,58 @@ details,
   }
 
   .hero-copy-button {
+    width: 40px;
     height: 40px;
-    padding: 0 13px;
+    padding: 0;
+    justify-self: end;
+    border-radius: 50%;
+  }
+
+  .hero-copy-button span {
+    display: none;
   }
 
   .hero-trust {
-    display: flex;
-    gap: 8px;
-    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 8px;
   }
 
   .hero-trust span {
-    min-height: 38px;
-    padding: 5px 12px 5px 6px;
-    font-size: 12px;
+    min-width: 0;
+    min-height: 40px;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px 6px;
+    font-size: 10.5px;
+    white-space: nowrap;
   }
 
   .hero-trust i {
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .hero-trust svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .hero-trust strong {
+    font-size: 10.5px;
   }
 
   .hero-stage {
-    height: 392px;
-    min-height: 392px;
-    overflow: hidden;
+    height: 356px;
+    min-height: 356px;
+    margin-top: -10px;
+    overflow: visible;
   }
 
   .artifact-plinth {
     left: 50%;
-    width: min(190px, 53vw);
+    width: min(230px, 62vw);
     transform: translateX(-50%);
   }
 
