@@ -14,6 +14,7 @@ const revealSelector = [
   ".capability-list",
   ".creator-examples",
   ".program-card",
+  ".value-card",
   ".showcase-grid",
   ".anatomy-list",
   ".path-card",

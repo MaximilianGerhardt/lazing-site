@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { BadgeCheck, ChartSpline, HeartHandshake, PanelsTopLeft, Sparkles, UsersRound } from "lucide-react";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { ProgramHero } from "@/components/ProgramHero";
 import { SchemaJsonLd } from "@/components/SchemaJsonLd";
 import { pageMetadata, site } from "@/lib/site";
 
@@ -34,6 +35,42 @@ const creatorTracks = [
   },
 ];
 
+const creatorBenefits = [
+  {
+    icon: Sparkles,
+    title: "Expertise becomes usable",
+    copy: "Your method turns into a system people can actually run.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Premium by default",
+    copy: "The experience carries trust before any marketplace mechanics appear.",
+  },
+  {
+    icon: UsersRound,
+    title: "Audience outcomes",
+    copy: "People get routines, decisions and progress instead of another saved post.",
+  },
+];
+
+const creatorValues = [
+  {
+    icon: PanelsTopLeft,
+    title: "Your method gets a surface",
+    copy: "A coaching routine, client workflow or learning path can appear as the right interface.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Trust stays human",
+    copy: "Consent, scope and trace make expert systems feel responsible instead of extractive.",
+  },
+  {
+    icon: ChartSpline,
+    title: "Better proof than hype",
+    copy: "The value is visible in outcomes, repeated use and clear decisions.",
+  },
+];
+
 const examples = [
   ["Fitness", "A nutrition creator ships a meal-log pack with check-ins, risk flags and progress reviews."],
   ["Agency", "A strategist ships client onboarding systems with briefs, decisions and launch trace."],
@@ -64,20 +101,41 @@ export default function CreatorsPage() {
         }}
       />
 
-      <section className="subpage-hero program-hero creator-page-hero">
-        <p className="eyebrow">Creator Program</p>
-        <h1>Publish the method behind the content.</h1>
-        <p>
-          The future creator does not only publish posts. They publish routines,
-          workflows, lenses and expert tracks that help people get better outcomes.
-        </p>
-        <div className="program-actions">
-          <Link className="button button-dark" href="/community">
-            Join early creators
-          </Link>
-          <Link className="button button-light" href="/manifestation-layer">
-            See Manifestation Packs
-          </Link>
+      <ProgramHero
+        eyebrow="Creator Program"
+        title="Publish the method behind the content."
+        copy="The future creator does not only publish posts. They publish routines, workflows, lenses and expert tracks that help people get better outcomes."
+        primary={{ href: "/community", label: "Join early creators" }}
+        secondary={{ href: "/manifestation-layer", label: "See Manifestation Packs" }}
+        benefits={creatorBenefits}
+        visual={{
+          kicker: "Creator value",
+          title: "Turn repeatable expertise into an audience system.",
+          copy: "The creator provides the method. Lazing shapes the surface.",
+          items: [
+            { label: "Start", value: "Method + lens" },
+            { label: "Create", value: "Pack + routine" },
+            { label: "Outcome", value: "Progress + trust" },
+          ],
+        }}
+      />
+
+      <section className="section value-section">
+        <p className="eyebrow">Why Creators Care</p>
+        <h2>Your best work should not disappear inside the feed.</h2>
+        <div className="value-grid">
+          {creatorValues.map((item) => {
+            const Icon = item.icon;
+            return (
+              <article className="value-card" key={item.title}>
+                <i aria-hidden="true">
+                  <Icon size={22} strokeWidth={1.7} />
+                </i>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </article>
+            );
+          })}
         </div>
       </section>
 

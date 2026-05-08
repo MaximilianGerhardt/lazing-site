@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Braces, Database, GitBranch, ShieldCheck, Workflow, Zap } from "lucide-react";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { ProgramHero } from "@/components/ProgramHero";
 import { SchemaJsonLd } from "@/components/SchemaJsonLd";
 import { pageMetadata, site } from "@/lib/site";
 
@@ -31,6 +32,42 @@ const stack = [
     title: "Trace ledger",
     copy: "SQLite-first records for decisions, changes, resolutions and agent handoffs.",
     className: "program-card",
+  },
+];
+
+const developerBenefits = [
+  {
+    icon: ShieldCheck,
+    title: "Scoped by design",
+    copy: "Credentials, memory and actions stay inside the field that owns them.",
+  },
+  {
+    icon: GitBranch,
+    title: "Bring your engines",
+    copy: "Codex, Claude Code, Ollama and local agents plug in as capabilities.",
+  },
+  {
+    icon: Database,
+    title: "Traceable work",
+    copy: "Every decision and handoff can leave an inspectable local record.",
+  },
+];
+
+const developerValues = [
+  {
+    icon: Workflow,
+    title: "Less integration glue",
+    copy: "Build one pack that can produce plans, review panels, trackers or decisions from intent.",
+  },
+  {
+    icon: Braces,
+    title: "Reusable domain logic",
+    copy: "Turn expert workflows into pack contracts instead of repeating prompt rituals.",
+  },
+  {
+    icon: Zap,
+    title: "Fast local iteration",
+    copy: "Prototype against a local runtime before any hosted surface or marketplace exists.",
   },
 ];
 
@@ -66,20 +103,41 @@ export default function DevelopersPage() {
         }}
       />
 
-      <section className="subpage-hero program-hero">
-        <p className="eyebrow">Developer Program</p>
-        <h1>Build the layer between intention and working software.</h1>
-        <p>
-          Lazing gives builders a local-first runtime for scoped agents, adaptive interfaces,
-          reusable packs and traceable decisions. Bring the engines. Keep the system bounded.
-        </p>
-        <div className="program-actions">
-          <a className="button button-dark" href={site.repo}>
-            View runtime repo
-          </a>
-          <Link className="button button-light" href="/manifestation-layer">
-            Read the layer
-          </Link>
+      <ProgramHero
+        eyebrow="Developer Program"
+        title="Build the layer between intention and working software."
+        copy="Lazing gives builders a local-first runtime for scoped agents, adaptive interfaces, reusable packs and traceable decisions. Bring the engines. Keep the system bounded."
+        primary={{ href: site.repo, label: "View runtime repo" }}
+        secondary={{ href: "/manifestation-layer", label: "Read the layer" }}
+        benefits={developerBenefits}
+        visual={{
+          kicker: "Builder value",
+          title: "Ship capability without surrendering scope.",
+          copy: "The runtime keeps authority while engines do useful work.",
+          items: [
+            { label: "Authority", value: "Local/VPS host" },
+            { label: "Memory", value: "Scoped fields" },
+            { label: "Review", value: "Trace + resolution" },
+          ],
+        }}
+      />
+
+      <section className="section value-section">
+        <p className="eyebrow">Why Builders Care</p>
+        <h2>Useful power without the usual agent sprawl.</h2>
+        <div className="value-grid">
+          {developerValues.map((item) => {
+            const Icon = item.icon;
+            return (
+              <article className="value-card" key={item.title}>
+                <i aria-hidden="true">
+                  <Icon size={22} strokeWidth={1.7} />
+                </i>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </article>
+            );
+          })}
         </div>
       </section>
 
