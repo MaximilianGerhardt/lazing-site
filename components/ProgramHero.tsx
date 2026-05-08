@@ -54,6 +54,7 @@ export function ProgramHero({
             {secondary.label}
           </a>
         </div>
+        <i className="program-gradient-mark" aria-hidden="true" />
         <div className="program-benefit-row" aria-label={`${eyebrow} benefits`}>
           {benefits.map((benefit) => {
             const Icon = benefit.icon;
