@@ -1,5 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+
+const installCommand = `git clone https://github.com/MaximilianGerhardt/lazing.git
+cd lazing
+./install`;
 
 function ChatIcon() {
   return (
@@ -30,6 +37,34 @@ function SparkIcon() {
 }
 
 export function LandingHero() {
+  const [copied, setCopied] = useState(false);
+
+  async function copyInstallCommand() {
+    try {
+      const copyWithTextarea = () => {
+        const textArea = document.createElement("textarea");
+        textArea.value = installCommand;
+        textArea.setAttribute("readonly", "");
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      };
+
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(installCommand).catch(copyWithTextarea);
+      } else {
+        copyWithTextarea();
+      }
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setCopied(false);
+    }
+  }
+
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-copy">
@@ -44,6 +79,37 @@ export function LandingHero() {
           <Link className="button button-light" href="/manifestation-layer">
             Explore the docs
           </Link>
+        </div>
+
+        <div className="hero-install" aria-label="Start Lazing from GitHub">
+          <a
+            className="hero-install-repo"
+            href="https://github.com/MaximilianGerhardt/lazing"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>GitHub</span>
+            <strong>MaximilianGerhardt/lazing</strong>
+          </a>
+          <code>git clone …/lazing && ./install</code>
+          <button
+            className="hero-copy-button"
+            type="button"
+            onClick={copyInstallCommand}
+            aria-label={copied ? "Install command copied" : "Copy install command"}
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              {copied ? (
+                <path d="m5 12 4.2 4.2L19 6.8" />
+              ) : (
+                <>
+                  <path d="M8 8.5V6.8C8 5.8 8.8 5 9.8 5h7.4c1 0 1.8.8 1.8 1.8v7.4c0 1-.8 1.8-1.8 1.8h-1.7" />
+                  <path d="M5 10.8C5 9.8 5.8 9 6.8 9h7.4c1 0 1.8.8 1.8 1.8v7.4c0 1-.8 1.8-1.8 1.8H6.8c-1 0-1.8-.8-1.8-1.8v-7.4Z" />
+                </>
+              )}
+            </svg>
+            <span>{copied ? "Copied" : "Copy"}</span>
+          </button>
         </div>
 
         <div className="hero-trust" aria-label="Lazing principles">
