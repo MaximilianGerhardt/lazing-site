@@ -1,0 +1,37 @@
+{
+  "name": "lazing-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Public website for Lazing, a local-first AI command center.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "local-first AI command center",
+    "Manifestation Layer",
+    "self-hosted AI runtime",
+    "intent-driven interface",
+    "scoped AI memory"
+  ],
+  "author": "Maximilian Gerhardt",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "resend": "^6.12.3",
+    "simple-icons": "^16.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.6",
+    "typescript": "^6.0.3"
+  }
+}

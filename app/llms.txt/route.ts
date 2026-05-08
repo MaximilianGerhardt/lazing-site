@@ -1,0 +1,68 @@
+import { site } from "@/lib/site";
+
+export const dynamic = "force-static";
+
+export function GET() {
+  const body = `# Lazing
+
+Lazing is a local-first AI command center that turns intention into scoped, living systems.
+
+Core positioning:
+- Primary line: Lazing turns intention into living systems.
+- Hero line: The system adapts to you.
+- Runtime: local machine or VPS.
+- Mobile: the phone is the primary Command Center, paired through a scoped QR or link.
+
+Install path:
+\`\`\`bash
+git clone https://github.com/MaximilianGerhardt/lazing.git
+cd lazing
+./install
+\`\`\`
+
+Important concepts:
+- Signal: a human intention, observation or request.
+- Field: the scoped runtime boundary.
+- Observation Lens: the perspective that shapes interpretation.
+- Manifestation Pack: reusable domain expertise and confirmation rules.
+- Manifestation: an adaptive interface, workflow, document, tracker, decision or system.
+- Resolution: user confirmation, adjustment or rejection.
+- Trace: local record of what happened and which scope authorized it.
+
+Adapters:
+- Codex
+- Claude Code
+- Ollama
+- OpenAI-compatible engines
+- local agents
+
+Creator and community direction:
+Creators can turn repeatable expertise into methods, routines, workflows, lenses, templates and expert tracks. The first story is empowerment; marketplace features can come later.
+
+Privacy direction:
+Lazing is local-first and designed with European privacy expectations in mind. No analytics should load before consent on this website. Sensitive data belongs in scoped fields by default.
+
+Links:
+- Website: ${site.url}
+- Runtime repository: ${site.repo}
+- Website repository: ${site.siteRepo}
+
+Developer program:
+- Builders can create adapters, Manifestation Packs, trace tooling, local/VPS runtime integrations, benchmark flows and documentation.
+- Engines are scoped capabilities, not owners of the whole user context.
+
+Creator program:
+- Creators can turn repeatable expertise into systems people can run.
+- The first story is empowerment and audience outcomes, not monetization.
+
+Newsletter:
+- The site includes a DSGVO-aware newsletter form with explicit consent.
+- Resend is prepared as the backend via RESEND_API_KEY plus optional segment/topic IDs.
+`;
+
+  return new Response(body, {
+    headers: {
+      "content-type": "text/plain; charset=utf-8",
+    },
+  });
+}
