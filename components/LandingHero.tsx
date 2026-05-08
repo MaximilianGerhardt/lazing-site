@@ -89,9 +89,8 @@ export function LandingHero() {
             rel="noreferrer"
           >
             <span>GitHub</span>
-            <strong>MaximilianGerhardt/lazing</strong>
           </a>
-          <code>git clone …/lazing && ./install</code>
+          <code>git clone https://github.com/MaximilianGerhardt/lazing.git</code>
           <button
             className="hero-copy-button"
             type="button"

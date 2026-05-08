@@ -3118,14 +3118,14 @@ details,
 }
 
 .hero-install {
-  width: min(560px, 100%);
+  width: min(590px, 100%);
   min-height: 58px;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   margin-top: 4px;
-  padding: 8px 8px 8px 16px;
+  padding: 8px 8px 8px 14px;
   border: 1px solid rgba(13, 13, 20, 0.07);
   border-radius: 999px;
   background:
@@ -3137,9 +3137,9 @@ details,
 }
 
 .hero-install-repo {
-  display: grid;
-  gap: 2px;
-  min-width: 134px;
+  display: inline-flex;
+  align-items: center;
+  min-width: 58px;
   color: rgba(13, 13, 20, 0.84);
   text-decoration: none;
 }
@@ -3152,31 +3152,23 @@ details,
   text-transform: uppercase;
 }
 
-.hero-install-repo strong {
-  font-size: 13px;
-  font-weight: 590;
-  line-height: 1.1;
-}
-
 .hero-install code {
   min-width: 0;
-  overflow: hidden;
-  color: rgba(13, 13, 20, 0.58);
+  color: rgba(13, 13, 20, 0.64);
   font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 12px;
-  font-weight: 520;
+  font-size: 11px;
+  font-weight: 540;
   line-height: 1;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .hero-copy-button {
-  height: 42px;
+  height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 0 15px;
+  padding: 0 13px;
   border: 0;
   border-radius: 999px;
   background: #0d0d14;
@@ -3184,7 +3176,7 @@ details,
   box-shadow: 0 12px 28px rgba(13, 13, 20, 0.14);
   cursor: pointer;
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 620;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
@@ -3372,6 +3364,9 @@ details,
     grid-row: 2;
     padding: 0 2px 5px;
     font-size: 11px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
 
   .hero-copy-button {
