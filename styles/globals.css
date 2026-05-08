@@ -3154,12 +3154,18 @@ details,
 
 .hero-install code {
   min-width: 0;
+  overflow: hidden;
   color: rgba(13, 13, 20, 0.64);
   font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 540;
   line-height: 1;
+  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.hero-install code span {
+  display: inline;
 }
 
 .hero-copy-button {
@@ -3311,6 +3317,29 @@ details,
     margin-left: clamp(24px, 6vw, 46px);
     margin-top: 0;
   }
+
+  .hero-install {
+    grid-template-columns: minmax(0, 1fr) auto;
+    border-radius: 28px;
+  }
+
+  .hero-install-repo {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .hero-copy-button {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .hero-install code {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding: 0 2px 5px;
+    font-size: 10.5px;
+    line-height: 1.35;
+  }
 }
 
 @media (max-width: 640px) {
@@ -3365,8 +3394,11 @@ details,
     padding: 0 2px 5px;
     font-size: 11px;
     line-height: 1.35;
-    overflow-wrap: anywhere;
     white-space: normal;
+  }
+
+  .hero-install code span {
+    display: block;
   }
 
   .hero-copy-button {

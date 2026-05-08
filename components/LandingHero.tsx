@@ -90,7 +90,10 @@ export function LandingHero() {
           >
             <span>GitHub</span>
           </a>
-          <code>git clone https://github.com/MaximilianGerhardt/lazing.git</code>
+          <code aria-label="git clone https://github.com/MaximilianGerhardt/lazing.git">
+            <span>git clone https://github.com/</span>
+            <span>MaximilianGerhardt/lazing.git</span>
+          </code>
           <button
             className="hero-copy-button"
             type="button"
