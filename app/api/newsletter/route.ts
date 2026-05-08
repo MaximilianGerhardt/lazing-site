@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { buildLazingWelcomeEmail, type NewsletterTrack } from "@/lib/email/lazingNewsletter";
 
 export const runtime = "nodejs";
 
@@ -60,6 +61,9 @@ export async function POST(request: Request) {
   const resend = new Resend(apiKey);
   const segmentId = process.env.RESEND_NEWSLETTER_SEGMENT_ID;
   const topicId = process.env.RESEND_NEWSLETTER_TOPIC_ID;
+  const fromEmail = process.env.RESEND_FROM_EMAIL;
+  const replyTo = process.env.RESEND_REPLY_TO_EMAIL;
+  const unsubscribeUrl = process.env.RESEND_UNSUBSCRIBE_URL;
   const now = new Date().toISOString();
   const contact = {
     email,
@@ -99,6 +103,29 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { message: "Newsletter signup failed. Please try again later." },
         { status: updated.error.statusCode ?? 500 },
+      );
+    }
+  }
+
+  if (fromEmail) {
+    const welcome = buildLazingWelcomeEmail({
+      track: track as NewsletterTrack,
+      unsubscribeUrl,
+    });
+
+    const welcomeEmail = await resend.emails.send({
+      from: fromEmail,
+      to: email,
+      replyTo,
+      subject: welcome.subject,
+      html: welcome.html,
+      text: welcome.text,
+    });
+
+    if (welcomeEmail.error) {
+      return NextResponse.json(
+        { message: "You are on the list, but the welcome email could not be sent yet." },
+        { status: welcomeEmail.error.statusCode ?? 500 },
       );
     }
   }

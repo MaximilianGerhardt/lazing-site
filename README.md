@@ -34,11 +34,18 @@ contact. It is wired for Resend through environment variables:
 RESEND_API_KEY=
 RESEND_NEWSLETTER_SEGMENT_ID=
 RESEND_NEWSLETTER_TOPIC_ID=
+RESEND_FROM_EMAIL=
+RESEND_REPLY_TO_EMAIL=
+RESEND_UNSUBSCRIBE_URL=
 ```
 
 `RESEND_NEWSLETTER_SEGMENT_ID` and `RESEND_NEWSLETTER_TOPIC_ID` are optional. Without
 `RESEND_API_KEY`, the API returns a clear launch-time error instead of pretending to
 subscribe the visitor.
+
+If `RESEND_FROM_EMAIL` is set to a verified Resend sender, the signup endpoint also
+sends a branded Lazing welcome email. Leave it empty until the sending domain is
+verified. `RESEND_REPLY_TO_EMAIL` and `RESEND_UNSUBSCRIBE_URL` are optional.
 
 ## Routes
 
