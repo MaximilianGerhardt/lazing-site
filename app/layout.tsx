@@ -80,6 +80,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <nav aria-label="Footer navigation">
             <Link href="/privacy">Privacy</Link>
             <Link href="/imprint">Imprint</Link>
+            <Link href="/terms">Risk Notice</Link>
             <Link href="/license">License</Link>
             <Link href="/changelog">Build Notes</Link>
             <a href="/llms.txt">llms.txt</a>

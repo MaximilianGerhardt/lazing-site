@@ -803,6 +803,13 @@ details p {
   font-size: 28px;
 }
 
+.prose-section address {
+  color: rgba(13, 13, 20, 0.7);
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
 .prose-section a {
   color: var(--blue);
   font-weight: 800;

@@ -44,11 +44,16 @@ Community participation is organized around runners, pack authors, reviewers and
 Privacy direction:
 Lazing is local-first and designed with European privacy expectations in mind. No analytics should load before consent on this website. Sensitive data belongs in scoped fields by default.
 
+Risk direction:
+AI models, agents and adapters can make mistakes. Lazing content is not legal, medical, financial, security or compliance advice. Local/VPS operators are responsible for installation, credentials, scopes, backups, adapter permissions and reviewing outputs before use.
+
 Links:
 - Website: ${site.url}
 - Runtime repository: ${site.repo}
 - Website repository: ${site.siteRepo}
 - Build notes: ${site.url}/changelog
+- Imprint: ${site.url}/imprint
+- Risk notice: ${site.url}/terms
 
 Developer program:
 - Builders can create adapters, Manifestation Packs, trace tooling, local/VPS runtime integrations, benchmark flows and documentation.

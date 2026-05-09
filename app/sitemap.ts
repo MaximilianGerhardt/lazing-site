@@ -10,6 +10,7 @@ const routes = [
   "/changelog",
   "/privacy",
   "/imprint",
+  "/terms",
   "/license",
 ];
 

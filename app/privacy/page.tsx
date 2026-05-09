@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/site";
 export const metadata: Metadata = pageMetadata({
   title: "Privacy - Lazing",
   description:
-    "DSGVO-aware privacy placeholder for Lazing. No analytics are loaded before consent.",
+    "DSGVO-aware privacy information for Lazing. No analytics are loaded before consent.",
   path: "/privacy",
 });
 
@@ -13,13 +13,20 @@ export default function PrivacyPage() {
     <main className="subpage legal-page">
       <section className="subpage-hero">
         <p className="eyebrow">Privacy</p>
-        <h1>Privacy placeholder for German legal details.</h1>
+        <h1>Der erste Besuch bleibt ruhig.</h1>
         <p>
-          This page is prepared for formal legal review. It does not fake compliance
-          statements or personal legal data.
+          Lazing ist so angelegt, dass notwendige Funktionen zuerst kommen und optionale
+          Signale erst nach Zustimmung geladen werden.
         </p>
       </section>
       <section className="section prose-section">
+        <h2>Verantwortlicher</h2>
+        <p>
+          Maximilian Gerhardt, c/o Impressumservice Dein-Impressum, Stettiner Straße 41,
+          35410 Hungen, Deutschland. Kontakt:{" "}
+          <a href="mailto:info@p-a.llc">info@p-a.llc</a>.
+        </p>
+
         <h2>Current site behavior</h2>
         <p>
           The public website is designed to load no analytics before consent. External
@@ -36,8 +43,12 @@ export default function PrivacyPage() {
         </p>
         <h2>Consent categories</h2>
         <p>Necessary, Analytics, Media Embeds and Community.</p>
-        <h2>Contact placeholder</h2>
-        <p>Contact details will be added with the final Impressum and privacy review.</p>
+        <h2>AI and runtime note</h2>
+        <p>
+          The public website does not run your local Lazing runtime. If you install or
+          self-host Lazing, the data processing of that runtime depends on your own
+          installation, adapters, models, credentials, scopes and infrastructure.
+        </p>
       </section>
     </main>
   );
