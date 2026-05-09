@@ -835,10 +835,12 @@ details p {
 
 .cookie-panel {
   position: fixed;
-  right: 16px;
-  bottom: 16px;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(14px + env(safe-area-inset-bottom));
   z-index: 60;
   width: min(390px, calc(100% - 32px));
+  max-height: calc(100svh - 28px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  overflow: auto;
   display: grid;
   gap: 16px;
   padding: 16px;
@@ -864,17 +866,56 @@ details p {
   gap: 8px;
 }
 
+.consent-row,
 .consent-toggle {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 38px;
+  min-height: 46px;
+  padding: 8px 10px;
+  border: 1px solid rgba(13, 13, 20, 0.06);
+  border-radius: 12px;
+  background: rgba(251, 252, 255, 0.72);
   color: rgba(13, 13, 20, 0.78);
   font-size: 14px;
   font-weight: 750;
 }
 
+.consent-row {
+  justify-content: space-between;
+}
+
+.consent-row span,
+.consent-toggle span {
+  display: grid;
+  gap: 3px;
+}
+
+.consent-row strong,
+.consent-toggle strong {
+  color: #0d0d14;
+  font-size: 13px;
+  font-weight: 720;
+}
+
+.consent-row small,
+.consent-toggle small {
+  color: rgba(13, 13, 20, 0.58);
+  font-size: 11px;
+  font-weight: 520;
+  line-height: 1.25;
+}
+
+.consent-row em {
+  color: rgba(13, 13, 20, 0.5);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .consent-toggle input {
+  flex: 0 0 auto;
   width: 18px;
   height: 18px;
   accent-color: var(--blue);
@@ -1567,13 +1608,15 @@ details {
 .cookie-panel {
   left: 50%;
   right: auto;
-  bottom: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom));
   width: min(720px, calc(100% - 28px));
+  max-height: calc(100svh - 28px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 14px;
   padding: 12px 12px 12px 16px;
   background: rgba(255, 255, 255, 0.82);
+  transform: translate3d(-50%, 0, 0);
 }
 
 .cookie-panel .eyebrow,
@@ -1587,8 +1630,24 @@ details {
   line-height: 1.35;
 }
 
-.consent-options {
+.cookie-panel:not(.is-expanded) .consent-options {
   display: none;
+}
+
+.cookie-panel.is-expanded {
+  width: min(760px, calc(100% - 28px));
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  padding: 16px;
+}
+
+.cookie-panel.is-expanded .eyebrow,
+.cookie-panel.is-expanded h2 {
+  display: block;
+}
+
+.cookie-panel.is-expanded .consent-options {
+  display: grid;
 }
 
 .cookie-actions {
@@ -1598,6 +1657,49 @@ details {
 .cookie-actions .button {
   min-height: 36px;
   white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .cookie-panel {
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    width: calc(100% - 20px);
+    max-height: calc(82svh - env(safe-area-inset-bottom));
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .cookie-panel.is-expanded {
+    width: calc(100% - 20px);
+    padding: 14px;
+  }
+
+  .cookie-panel p {
+    font-size: 12px;
+  }
+
+  .cookie-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .cookie-actions .button {
+    width: 100%;
+    min-height: 40px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .cookie-actions .button-dark {
+    grid-column: 1 / -1;
+  }
+
+  .consent-row,
+  .consent-toggle {
+    align-items: flex-start;
+  }
 }
 
 @media (min-width: 720px) {
@@ -4382,7 +4484,7 @@ summary {
   height: 520svh;
   min-height: 0;
   margin-top: clamp(42px, 6vw, 70px);
-  margin-bottom: clamp(10px, 3vw, 34px);
+  margin-bottom: clamp(70px, 9vw, 130px);
   position: relative;
 }
 
@@ -4482,7 +4584,8 @@ summary {
   min-height: clamp(330px, 36vw, 430px);
   display: grid;
   place-items: center;
-  overflow: hidden;
+  padding: 0 0 clamp(44px, 5vw, 76px);
+  overflow: visible;
 }
 
 .flow-story-card {
@@ -4665,7 +4768,7 @@ summary {
     height: 460svh;
     min-height: 0;
     margin-top: 34px;
-    margin-bottom: 12px;
+    margin-bottom: 74px;
   }
 
   .flow-story-sticky {
@@ -4706,6 +4809,7 @@ summary {
 
   .flow-card-stage {
     min-height: 390px;
+    padding-bottom: 64px;
   }
 
   .flow-story-card {
