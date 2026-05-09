@@ -12,7 +12,7 @@ import {
   SquareStack,
   UsersRound,
 } from "lucide-react";
-import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { ProgramApplicationForm } from "@/components/ProgramApplicationForm";
 import { ProgramHero } from "@/components/ProgramHero";
 import { SchemaJsonLd } from "@/components/SchemaJsonLd";
 import { pageMetadata, site } from "@/lib/site";
@@ -62,6 +62,21 @@ const creatorBenefits = [
     icon: UsersRound,
     title: "Audience outcomes",
     copy: "People get routines, decisions and progress instead of another saved post.",
+  },
+];
+
+const creatorApplicationBenefits = [
+  {
+    title: "Turn a method into a pack",
+    copy: "Bring one repeatable outcome and shape it into a scoped Lazing system.",
+  },
+  {
+    title: "Get review before public launch",
+    copy: "Early pack reviews focus on claims, risks, audience fit and responsible surfaces.",
+  },
+  {
+    title: "Earn founding credit",
+    copy: "Strong early creators can receive Founding Creator status and future showcase priority.",
   },
 ];
 
@@ -154,7 +169,7 @@ export default function CreatorsPage() {
         eyebrow="Creator Program"
         title="Publish the method behind the content."
         copy="The future creator does not only publish posts. They publish routines, workflows, lenses and expert tracks that help people get better outcomes."
-        primary={{ href: "/community", label: "Join early creators" }}
+        primary={{ href: "#founding-circle", label: "Apply as Founding Creator" }}
         secondary={{ href: "/manifestation-layer", label: "See Manifestation Packs" }}
         benefits={creatorBenefits}
         visual={{
@@ -315,11 +330,12 @@ export default function CreatorsPage() {
         </div>
       </section>
 
-      <NewsletterSignup
+      <ProgramApplicationForm
         source="creators-page"
-        defaultTrack="creator"
-        title="Join the creator list before packs open."
-        copy="Get creator program notes, pack examples, early review calls and the first launch invitation when the program is ready."
+        defaultRole="creator"
+        title="Apply before creator packs open."
+        copy="The first Founding Creators will help define what responsible audience systems should feel like before any marketplace story begins."
+        benefits={creatorApplicationBenefits}
       />
     </main>
   );

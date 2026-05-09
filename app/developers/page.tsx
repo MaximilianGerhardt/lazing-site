@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Braces, Database, GitBranch, ShieldCheck, Workflow, Zap } from "lucide-react";
-import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { ProgramApplicationForm } from "@/components/ProgramApplicationForm";
 import { ProgramHero } from "@/components/ProgramHero";
 import { SchemaJsonLd } from "@/components/SchemaJsonLd";
 import { pageMetadata, site } from "@/lib/site";
@@ -53,6 +53,21 @@ const developerBenefits = [
   },
 ];
 
+const developerApplicationBenefits = [
+  {
+    title: "Own a contribution track",
+    copy: "Pick a concrete surface: adapter, trace tool, pack test harness, eval, docs or runtime UX.",
+  },
+  {
+    title: "Influence the interface",
+    copy: "Early technical contributors help harden pack contracts before the API surface settles.",
+  },
+  {
+    title: "Get early architecture calls",
+    copy: "Strong applicants can join private review loops around adapters, scope and trace.",
+  },
+];
+
 const developerValues = [
   {
     icon: Workflow,
@@ -78,6 +93,13 @@ const tracks = [
   "Benchmark and eval builders",
   "Security and privacy reviewers",
   "Docs and example authors",
+];
+
+const developerUseCases = [
+  ["Codex adapter", "Shape how Codex becomes a scoped capability instead of an owner of the whole context."],
+  ["Ollama path", "Help make local models useful inside fields, packs and traceable resolutions."],
+  ["Trace viewer", "Build the surface that makes decisions, changes and agent handoffs inspectable."],
+  ["Pack test harness", "Create checks that keep creator packs honest before a public showcase exists."],
 ];
 
 const packAnatomy = [
@@ -107,7 +129,7 @@ export default function DevelopersPage() {
         eyebrow="Developer Program"
         title="Build the layer between intention and working software."
         copy="Lazing gives builders a local-first runtime for scoped agents, adaptive interfaces, reusable packs and traceable decisions. Bring the engines. Keep the system bounded."
-        primary={{ href: site.repo, label: "View runtime repo" }}
+        primary={{ href: "#founding-circle", label: "Apply as Founding Developer" }}
         secondary={{ href: "/manifestation-layer", label: "Read the layer" }}
         benefits={developerBenefits}
         visual={{
@@ -211,11 +233,25 @@ lazing pack dev ./packs/product-launch`}</pre>
         </div>
       </section>
 
-      <NewsletterSignup
+      <section className="section creator-showcase">
+        <p className="eyebrow">Developer Use Cases</p>
+        <h2>The first technical work should make scope easier to trust.</h2>
+        <div className="showcase-grid">
+          {developerUseCases.map(([title, copy]) => (
+            <article key={title}>
+              <span>{title}</span>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <ProgramApplicationForm
         source="developers-page"
-        defaultTrack="developer"
-        title="Get the developer letter before the API surface settles."
-        copy="Join for pack format notes, adapter milestones, architecture decisions and early calls for technical reviewers."
+        defaultRole="developer"
+        title="Apply before the API surface settles."
+        copy="The first Founding Developers will influence adapter boundaries, pack contracts and the trace layer before Lazing hardens."
+        benefits={developerApplicationBenefits}
       />
     </main>
   );

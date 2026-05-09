@@ -1,12 +1,18 @@
 import type { NewsletterTrack } from "@/lib/email/lazingNewsletter";
+import type { ProgramRole } from "@/lib/program/foundingCircle";
 
 export type NewsletterConfirmationPayload = {
+  kind?: "newsletter" | "program";
   email: string;
   track: NewsletterTrack;
   source: string;
   issuedAt: number;
   expiresAt: number;
   nonce: string;
+  programRole?: ProgramRole;
+  programUseCase?: string;
+  programContribution?: string;
+  programLink?: string;
 };
 
 const encoder = new TextEncoder();
@@ -79,6 +85,13 @@ export async function verifyNewsletterConfirmationToken(token: string, secret: s
     const payload = JSON.parse(base64UrlDecode(body)) as NewsletterConfirmationPayload;
 
     if (!payload.email || !payload.track || payload.expiresAt < Date.now()) {
+      return null;
+    }
+
+    if (
+      payload.kind === "program" &&
+      (!payload.programRole || !payload.programUseCase || !payload.programContribution)
+    ) {
       return null;
     }
 

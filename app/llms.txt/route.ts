@@ -40,6 +40,7 @@ Creator and community direction:
 Creators can turn repeatable expertise into methods, routines, workflows, lenses, templates and expert tracks. The first story is empowerment; marketplace features can come later.
 Creator packs are described through a blueprint: method, lens, inputs, risks, surfaces and trace.
 Community participation is organized around runners, pack authors, reviewers and maintainers.
+The first public program funnel is the Lazing Founding Circle: Founding Creators, Founding Developers and Founding Builders apply through Double Opt-In and manual review.
 
 Privacy direction:
 Lazing is local-first and designed with European privacy expectations in mind. No analytics should load before consent on this website. Sensitive data belongs in scoped fields by default.
@@ -66,6 +67,10 @@ Creator program:
 Newsletter:
 - The site includes a GDPR-aware newsletter form with Double Opt-In.
 - Resend is prepared as the backend via RESEND_API_KEY plus optional segment/topic IDs.
+
+Founding Circle:
+- Creator, Developer and Builder applications use Resend contacts plus manual review email.
+- The first reward model is status and access: founding badges, private build notes, early review calls and future showcase priority.
 `;
 
   return new Response(body, {

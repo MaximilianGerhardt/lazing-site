@@ -1,18 +1,36 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { buildLazingWelcomeEmail } from "@/lib/email/lazingNewsletter";
+import {
+  buildFoundingCircleReviewEmail,
+  buildLazingWelcomeEmail,
+} from "@/lib/email/lazingNewsletter";
+import type { ProgramRole } from "@/lib/program/foundingCircle";
 import { site } from "@/lib/site";
 import { verifyNewsletterConfirmationToken } from "@/lib/newsletter/doiToken";
 
 export const runtime = "nodejs";
 
 const allowedTracks = new Set(["builder", "developer", "creator", "changelog", "launch"]);
+const allowedRoles = new Set<ProgramRole>(["creator", "developer", "builder"]);
 const consentText =
   "I want to receive the Lazing founder letter, product updates and program invitations. I can unsubscribe at any time.";
+const programConsentText =
+  "I want to receive the Lazing founder letter and Founding Circle program invitations. I can unsubscribe at any time.";
 
 function redirect(status: string) {
   const url = new URL("/newsletter/confirmed", site.url);
   url.searchParams.set("status", status);
+
+  return NextResponse.redirect(url);
+}
+
+function redirectProgram(status: string, role?: ProgramRole) {
+  const url = new URL("/program/confirmed", site.url);
+  url.searchParams.set("status", status);
+
+  if (role) {
+    url.searchParams.set("role", role);
+  }
 
   return NextResponse.redirect(url);
 }
@@ -39,6 +57,98 @@ export async function GET(request: Request) {
   const replyTo = process.env.RESEND_REPLY_TO_EMAIL;
   const unsubscribeUrl = process.env.RESEND_UNSUBSCRIBE_URL;
   const now = new Date().toISOString();
+
+  if (payload.kind === "program") {
+    const role = payload.programRole;
+
+    if (
+      !role ||
+      !allowedRoles.has(role) ||
+      !payload.programUseCase ||
+      !payload.programContribution
+    ) {
+      return redirectProgram("invalid");
+    }
+
+    const update = await resend.contacts.update({
+      email: payload.email,
+      unsubscribed: false,
+      properties: {
+        source: payload.source,
+        track: payload.track,
+        program_role: role,
+        program_status: "pending_review",
+        program_use_case: payload.programUseCase,
+        program_contribution: payload.programContribution,
+        program_link: payload.programLink ?? "",
+        program_source: payload.source,
+        consent_text: programConsentText,
+        consent_version: "lazing-founding-circle-v1",
+        consent_at: now,
+        doi_status: "confirmed",
+        doi_requested_at: new Date(payload.issuedAt).toISOString(),
+        doi_confirmed_at: now,
+        page: "laz.ing",
+      },
+    });
+
+    if (update.error) {
+      return redirectProgram("failed", role);
+    }
+
+    if (segmentId) {
+      const segment = await resend.contacts.segments.add({
+        email: payload.email,
+        segmentId,
+      });
+      const alreadyInSegment =
+        segment.error?.statusCode === 409 ||
+        segment.error?.message.toLowerCase().includes("already");
+
+      if (segment.error && !alreadyInSegment) {
+        return redirectProgram("failed", role);
+      }
+    }
+
+    if (topicId) {
+      const topic = await resend.contacts.topics.update({
+        email: payload.email,
+        topics: [{ id: topicId, subscription: "opt_in" }],
+      });
+
+      if (topic.error) {
+        return redirectProgram("failed", role);
+      }
+    }
+
+    if (fromEmail) {
+      const programReviewEmail =
+        process.env.PROGRAM_REVIEW_EMAIL ?? process.env.RESEND_REPLY_TO_EMAIL ?? "info@p-a.llc";
+      const review = buildFoundingCircleReviewEmail({
+        email: payload.email,
+        role,
+        useCase: payload.programUseCase,
+        contribution: payload.programContribution,
+        link: payload.programLink,
+        source: payload.source,
+      });
+
+      const reviewEmail = await resend.emails.send({
+        from: fromEmail,
+        to: programReviewEmail,
+        replyTo: payload.email,
+        subject: review.subject,
+        html: review.html,
+        text: review.text,
+      });
+
+      if (reviewEmail.error) {
+        return redirectProgram("failed", role);
+      }
+    }
+
+    return redirectProgram("confirmed", role);
+  }
 
   const update = await resend.contacts.update({
     email: payload.email,

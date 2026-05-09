@@ -339,7 +339,7 @@ cd lazing
           </p>
           <div className="cta-row">
             <a className="button button-dark" href="/creators">Build your first pack</a>
-            <a className="button button-light" href="/community">Join the creator list</a>
+            <a className="button button-light" href="/creators#founding-circle">Apply as creator</a>
           </div>
         </div>
         <div className="creator-examples">
@@ -387,7 +387,7 @@ cd lazing
         <div className="hero-actions">
           <a className="button button-dark" href="#start-locally">Start locally</a>
           <a className="button button-light" href={site.repo}>Star on GitHub</a>
-          <a className="button button-quiet" href="/community">Join early builders</a>
+          <a className="button button-quiet" href="/community#founding-circle">Join early builders</a>
         </div>
       </section>
     </main>

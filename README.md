@@ -7,7 +7,7 @@ Public website for Lazing: a local-first AI command center that turns intention 
 - Next.js App Router
 - TypeScript
 - Plain CSS design system
-- DSGVO-friendly consent shell
+- GDPR-aware consent shell
 - Metadata routes for `robots.txt`, `sitemap.xml`, `llms.txt` and OpenGraph
 
 ## Development
@@ -27,7 +27,7 @@ npm run build
 
 ## Newsletter Backend
 
-The newsletter form is DSGVO-aware and requires explicit consent before creating a
+The newsletter form is GDPR-aware and requires explicit consent before creating a
 confirmed newsletter contact. It uses Double Opt-In and is wired for Resend through
 environment variables:
 
@@ -38,6 +38,7 @@ RESEND_NEWSLETTER_TOPIC_ID=
 RESEND_FROM_EMAIL=
 RESEND_REPLY_TO_EMAIL=
 RESEND_UNSUBSCRIBE_URL=
+PROGRAM_REVIEW_EMAIL=
 NEWSLETTER_CONFIRM_SECRET=
 NEWSLETTER_CONFIRM_BASE_URL=https://laz.ing
 ```
@@ -51,6 +52,9 @@ subscribe the visitor.
 branded confirmation email. The contact is only moved into the newsletter segment
 after confirmation. Leave `RESEND_FROM_EMAIL` empty until the sending domain is
 verified. `RESEND_REPLY_TO_EMAIL` and `RESEND_UNSUBSCRIBE_URL` are optional.
+`PROGRAM_REVIEW_EMAIL` receives confirmed Founding Circle applications. If it is not
+set, the program review email falls back to `RESEND_REPLY_TO_EMAIL` and then
+`info@p-a.llc`.
 
 ## Routes
 
@@ -59,6 +63,10 @@ verified. `RESEND_REPLY_TO_EMAIL` and `RESEND_UNSUBSCRIBE_URL` are optional.
 - `/developers`
 - `/creators`
 - `/community`
+- `/changelog`
+- `/terms`
+- `/program/check-email`
+- `/program/confirmed`
 - `/privacy`
 - `/imprint`
 - `/license`

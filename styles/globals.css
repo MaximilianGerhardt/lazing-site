@@ -4733,6 +4733,7 @@ summary {
 .motion-ready .submission-section,
 .motion-ready .submission-steps,
 .motion-ready .build-public-section,
+.motion-ready .program-application-panel,
 .motion-ready .changelog-note,
 .motion-ready details,
 .motion-ready .final-cta {
@@ -4781,6 +4782,7 @@ summary {
 .motion-ready .submission-section.is-visible,
 .motion-ready .submission-steps.is-visible,
 .motion-ready .build-public-section.is-visible,
+.motion-ready .program-application-panel.is-visible,
 .motion-ready .changelog-note.is-visible,
 .motion-ready details.is-visible,
 .motion-ready .final-cta.is-visible {
@@ -5937,6 +5939,105 @@ summary {
   backdrop-filter: blur(24px);
 }
 
+.program-application-panel {
+  width: min(1160px, calc(100% - 56px));
+  margin: clamp(80px, 12vw, 150px) auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(340px, 0.82fr);
+  gap: clamp(28px, 6vw, 86px);
+  align-items: start;
+  padding: clamp(28px, 5vw, 62px);
+  border: 1px solid rgba(13, 13, 20, 0.06);
+  border-radius: 40px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.58)),
+    radial-gradient(circle at 88% 10%, rgba(104, 124, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 8% 92%, rgba(255, 154, 60, 0.12), transparent 30%),
+    radial-gradient(circle at 54% 44%, rgba(255, 102, 199, 0.06), transparent 34%);
+  box-shadow: 0 36px 100px rgba(30, 32, 60, 0.09);
+  backdrop-filter: blur(24px);
+  scroll-margin-top: 120px;
+}
+
+.program-application-copy h2 {
+  max-width: 760px;
+  margin: 0;
+  color: #0d0d14;
+  font-size: clamp(44px, 6.4vw, 88px);
+  font-weight: 590;
+  line-height: 0.98;
+  letter-spacing: -0.018em;
+}
+
+.program-application-copy > p:not(.eyebrow) {
+  max-width: 690px;
+  margin-top: 20px;
+  color: rgba(13, 13, 20, 0.62);
+  font-size: clamp(18px, 2vw, 23px);
+  line-height: 1.42;
+}
+
+.founding-badge {
+  width: fit-content;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 0 16px;
+  border: 1px solid rgba(13, 13, 20, 0.07);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(247, 247, 255, 0.68)),
+    radial-gradient(circle at 86% 18%, rgba(255, 102, 199, 0.16), transparent 36%);
+  box-shadow: 0 18px 52px rgba(30, 32, 60, 0.07);
+  color: #0d0d14;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.founding-badge svg {
+  color: #7b65ff;
+}
+
+.program-application-benefits {
+  display: grid;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.program-application-benefits article {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: start;
+  gap: 14px;
+  min-height: 96px;
+  padding: 18px;
+  border: 1px solid rgba(13, 13, 20, 0.065);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 22px 58px rgba(30, 32, 60, 0.055);
+}
+
+.program-application-benefits svg {
+  color: #7b65ff;
+}
+
+.program-application-benefits strong {
+  display: block;
+  color: #0d0d14;
+  font-size: 16px;
+  font-weight: 640;
+}
+
+.program-application-benefits span {
+  display: block;
+  margin-top: 5px;
+  color: rgba(13, 13, 20, 0.6);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
 .newsletter-copy h2 {
   max-width: 740px;
   margin: 0;
@@ -5962,7 +6063,8 @@ summary {
   margin-top: 28px;
 }
 
-.newsletter-form {
+.newsletter-form,
+.program-application-form {
   display: grid;
   gap: 14px;
   padding: clamp(18px, 2.4vw, 28px);
@@ -5972,7 +6074,8 @@ summary {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.newsletter-form label {
+.newsletter-form label,
+.program-application-form label {
   display: grid;
   gap: 8px;
   color: rgba(13, 13, 20, 0.55);
@@ -5983,7 +6086,10 @@ summary {
 }
 
 .newsletter-form input:not([type="checkbox"]),
-.newsletter-form select {
+.newsletter-form select,
+.program-application-form input:not([type="checkbox"]),
+.program-application-form select,
+.program-application-form textarea {
   width: 100%;
   min-height: 54px;
   border: 1px solid rgba(13, 13, 20, 0.08);
@@ -5993,6 +6099,13 @@ summary {
   color: #0d0d14;
   font: inherit;
   letter-spacing: 0;
+}
+
+.program-application-form textarea {
+  min-height: 116px;
+  resize: vertical;
+  padding: 15px 16px;
+  line-height: 1.45;
 }
 
 .newsletter-consent {
@@ -6175,7 +6288,8 @@ summary {
 
   .program-console-section,
   .program-split,
-  .newsletter-panel {
+  .newsletter-panel,
+  .program-application-panel {
     grid-template-columns: 1fr;
   }
 
@@ -6223,7 +6337,14 @@ summary {
     border-radius: 28px;
   }
 
-  .newsletter-copy h2 {
+  .program-application-panel {
+    width: min(100% - 28px, 560px);
+    border-radius: 30px;
+    padding: 26px 18px;
+  }
+
+  .newsletter-copy h2,
+  .program-application-copy h2 {
     font-size: clamp(38px, 12vw, 54px);
   }
 

@@ -21,6 +21,7 @@ const revealSelector = [
   ".submission-section",
   ".submission-steps",
   ".build-public-section",
+  ".program-application-panel",
   ".changelog-note",
   ".program-card",
   ".value-card",

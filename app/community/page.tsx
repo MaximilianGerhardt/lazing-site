@@ -11,7 +11,7 @@ import {
   Sparkles,
   UsersRound,
 } from "lucide-react";
-import { NewsletterSignup } from "@/components/NewsletterSignup";
+import { ProgramApplicationForm } from "@/components/ProgramApplicationForm";
 import { ProgramHero } from "@/components/ProgramHero";
 import { SchemaJsonLd } from "@/components/SchemaJsonLd";
 import { pageMetadata, site } from "@/lib/site";
@@ -74,6 +74,21 @@ const communityBenefits = [
   },
 ];
 
+const builderApplicationBenefits = [
+  {
+    title: "Run early systems",
+    copy: "Use Lazing on local/VPS workflows and report what breaks before the public story hardens.",
+  },
+  {
+    title: "Shape UX from real use",
+    copy: "Your friction reports influence fields, packs, runtime setup and mobile command surfaces.",
+  },
+  {
+    title: "Earn early builder credit",
+    copy: "Useful feedback can lead to Founding Builder status and future showcase consideration.",
+  },
+];
+
 const roles = [
   {
     name: "Runner",
@@ -108,6 +123,13 @@ const buildNotes = [
   ["Runtime first", "Local/VPS authority, scoped memory and adapter boundaries."],
   ["Packs second", "Creator methods become reusable only after quality review."],
   ["Gallery later", "Public discovery should wait until trust mechanics exist."],
+];
+
+const builderUseCases = [
+  ["Local install proof", "Run Lazing from a real machine and record what blocks first-time setup."],
+  ["VPS workflow", "Test a remote runtime path with scoped credentials, trace and phone-first control."],
+  ["Pack pilot", "Try an early pack in real work and report where the system asks too much or too little."],
+  ["Workflow proof", "Bring one useful daily system that should become easier than a dashboard."],
 ];
 
 export default function CommunityPage() {
@@ -241,11 +263,25 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      <NewsletterSignup
+      <section className="section creator-showcase">
+        <p className="eyebrow">Builder Use Cases</p>
+        <h2>Community starts with real systems, not a channel list.</h2>
+        <div className="showcase-grid">
+          {builderUseCases.map(([title, copy]) => (
+            <article key={title}>
+              <span>{title}</span>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <ProgramApplicationForm
         source="community-page"
-        defaultTrack="builder"
-        title="Join without joining another noisy community."
-        copy="The Lazing letter is the quiet entry point for early builders, creators and pack authors until public channels open."
+        defaultRole="builder"
+        title="Apply to the Founding Circle."
+        copy="The first community cohort is a quality loop: builders, creators and maintainers proving what Lazing should become through real work."
+        benefits={builderApplicationBenefits}
       />
     </main>
   );

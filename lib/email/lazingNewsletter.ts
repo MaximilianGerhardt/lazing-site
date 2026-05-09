@@ -1,4 +1,5 @@
 export type NewsletterTrack = "builder" | "developer" | "creator" | "changelog" | "launch";
+export type ProgramRole = "creator" | "developer" | "builder";
 
 const trackLabels: Record<NewsletterTrack, string> = {
   launch: "Launch letter",
@@ -16,6 +17,18 @@ const trackNotes: Record<NewsletterTrack, string> = {
   changelog: "You will get compact release notes: meaningful changes only, no noisy drip campaign.",
 };
 
+const programRoleLabels: Record<ProgramRole, string> = {
+  creator: "Founding Creator",
+  developer: "Founding Developer",
+  builder: "Founding Builder",
+};
+
+const programRoleNotes: Record<ProgramRole, string> = {
+  creator: "A creator application for turning repeatable expertise into packs, routines and audience systems.",
+  developer: "A developer application for adapters, trace tools, evals, pack infrastructure or runtime integrations.",
+  builder: "A builder application for running early systems, reporting friction and proving real workflows.",
+};
+
 type WelcomeEmailOptions = {
   track: NewsletterTrack;
   unsubscribeUrl?: string;
@@ -25,6 +38,22 @@ type ConfirmationEmailOptions = {
   track: NewsletterTrack;
   confirmUrl: string;
   expiresInHours?: number;
+};
+
+type ProgramConfirmationEmailOptions = {
+  role: ProgramRole;
+  useCase: string;
+  confirmUrl: string;
+  expiresInHours?: number;
+};
+
+type ProgramReviewEmailOptions = {
+  email: string;
+  role: ProgramRole;
+  useCase: string;
+  contribution: string;
+  link?: string;
+  source: string;
 };
 
 function escapeHtml(value: string) {
@@ -196,6 +225,135 @@ export function buildLazingWelcomeEmail({ track, unsubscribeUrl }: WelcomeEmailO
 
   return {
     subject: "You are on the Lazing letter",
+    html,
+    text,
+  };
+}
+
+export function buildFoundingCircleConfirmationEmail({
+  role,
+  useCase,
+  confirmUrl,
+  expiresInHours = 48,
+}: ProgramConfirmationEmailOptions) {
+  const roleLabel = programRoleLabels[role];
+  const roleNote = programRoleNotes[role];
+  const safeConfirmUrl = escapeHtml(confirmUrl);
+  const safeUseCase = escapeHtml(useCase);
+  const body = `
+    <h1 style="margin:18px 0 0;font-size:46px;line-height:1.02;font-weight:650;letter-spacing:-.02em;color:#0d0d14;">Confirm your Founding Circle application.</h1>
+    <p style="margin:20px 0 0;font-size:19px;line-height:1.45;color:#5f6270;">One clear yes before we keep your attention. The first Lazing cohort is curated, quiet and built around useful work.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:30px 0 0;border-collapse:separate;border-spacing:0 10px;">
+      <tr>
+        <td style="border:1px solid rgba(13,13,20,.07);border-radius:18px;background:rgba(255,255,255,.72);padding:16px 18px;">
+          <div style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#7a7d89;">Application role</div>
+          <div style="margin-top:8px;font-size:17px;font-weight:650;color:#0d0d14;">${escapeHtml(roleLabel)}</div>
+          <div style="margin-top:6px;font-size:15px;line-height:1.45;color:#696c77;">${escapeHtml(roleNote)}</div>
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid rgba(13,13,20,.07);border-radius:18px;background:rgba(255,255,255,.58);padding:16px 18px;">
+          <div style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#7a7d89;">Use case</div>
+          <div style="margin-top:8px;font-size:15px;line-height:1.45;color:#5f6270;">${safeUseCase}</div>
+        </td>
+      </tr>
+    </table>
+    <a href="${safeConfirmUrl}" style="display:inline-block;margin-top:28px;padding:15px 22px;border-radius:999px;background:#0d0d14;color:#ffffff;font-size:15px;font-weight:650;text-decoration:none;">Confirm application</a>
+    <p style="margin:22px 0 0;font-size:13px;line-height:1.55;color:#777a86;">This link expires in ${expiresInHours} hours. If the button does not open, use this link:<br><a href="${safeConfirmUrl}" style="color:#687cff;text-decoration:none;word-break:break-all;">${safeConfirmUrl}</a></p>
+  `;
+  const html = brandShell({
+    title: "Confirm your Founding Circle application",
+    preheader: `Confirm your ${roleLabel} application for the Lazing Founding Circle.`,
+    eyebrow: "Founding Circle",
+    body,
+    footer:
+      "You receive this because this address applied to the Lazing Founding Circle on laz.ing. If that was not you, ignore this email and nothing else happens.",
+  });
+  const text = [
+    "Confirm your Founding Circle application.",
+    "",
+    `Role: ${roleLabel}`,
+    roleNote,
+    "",
+    "Use case:",
+    useCase,
+    "",
+    "Confirm:",
+    confirmUrl,
+    "",
+    `This link expires in ${expiresInHours} hours. If this was not you, ignore this email.`,
+  ].join("\n");
+
+  return {
+    subject: `Confirm your ${roleLabel} application`,
+    html,
+    text,
+  };
+}
+
+export function buildFoundingCircleReviewEmail({
+  email,
+  role,
+  useCase,
+  contribution,
+  link,
+  source,
+}: ProgramReviewEmailOptions) {
+  const roleLabel = programRoleLabels[role];
+  const safeEmail = escapeHtml(email);
+  const safeUseCase = escapeHtml(useCase);
+  const safeContribution = escapeHtml(contribution);
+  const safeLink = link ? escapeHtml(link) : "";
+  const body = `
+    <h1 style="margin:18px 0 0;font-size:42px;line-height:1.04;font-weight:650;letter-spacing:-.02em;color:#0d0d14;">New ${escapeHtml(roleLabel)} application.</h1>
+    <p style="margin:20px 0 0;font-size:18px;line-height:1.45;color:#5f6270;">The applicant confirmed Double Opt-In and is ready for manual Founding Circle review.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:30px 0 0;border-collapse:separate;border-spacing:0 10px;">
+      ${[
+        ["Email", safeEmail],
+        ["Role", escapeHtml(roleLabel)],
+        ["Source", escapeHtml(source)],
+        ["Use case", safeUseCase],
+        ["Contribution", safeContribution],
+        ["Link", safeLink || "Not provided"],
+      ]
+        .map(
+          ([label, value]) => `
+      <tr>
+        <td style="border:1px solid rgba(13,13,20,.07);border-radius:18px;background:rgba(255,255,255,.72);padding:16px 18px;">
+          <div style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#7a7d89;">${label}</div>
+          <div style="margin-top:8px;font-size:15px;line-height:1.45;color:#0d0d14;word-break:break-word;">${value}</div>
+        </td>
+      </tr>`,
+        )
+        .join("")}
+    </table>
+  `;
+  const html = brandShell({
+    title: `New ${roleLabel} application`,
+    preheader: `${email} confirmed a Lazing Founding Circle application.`,
+    eyebrow: "Program review",
+    body,
+    footer:
+      "This internal email was generated after Double Opt-In confirmation on laz.ing.",
+  });
+  const text = [
+    `New ${roleLabel} application`,
+    "",
+    `Email: ${email}`,
+    `Role: ${roleLabel}`,
+    `Source: ${source}`,
+    "",
+    "Use case:",
+    useCase,
+    "",
+    "Contribution:",
+    contribution,
+    "",
+    `Link: ${link || "Not provided"}`,
+  ].join("\n");
+
+  return {
+    subject: `New ${roleLabel} application`,
     html,
     text,
   };
