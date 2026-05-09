@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type NewsletterSignupProps = {
   title?: string;
@@ -24,6 +25,7 @@ export function NewsletterSignup({
   source,
   defaultTrack = "launch",
 }: NewsletterSignupProps) {
+  const router = useRouter();
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
@@ -56,19 +58,20 @@ export function NewsletterSignup({
 
     form.reset();
     setStatus("success");
-    setMessage(data.message ?? "You are on the list.");
+    setMessage(data.message ?? "One step left. Please confirm the email we just sent.");
+    router.push("/newsletter/check-email");
   }
 
   return (
-    <section className="newsletter-panel" aria-label="Lazing newsletter">
+    <section className="newsletter-panel" id="letter" aria-label="Lazing newsletter">
       <div className="newsletter-copy">
         <p className="eyebrow">Founder Letter</p>
         <h2>{title}</h2>
         <p>{copy}</p>
         <div className="newsletter-proof" aria-label="Newsletter principles">
           <span>Necessary data only</span>
+          <span>Double opt-in</span>
           <span>Unsubscribe anytime</span>
-          <span>No analytics required</span>
         </div>
       </div>
 
@@ -92,11 +95,12 @@ export function NewsletterSignup({
           <input name="consent" type="checkbox" required />
           <span>
             I want to receive the Lazing founder letter, product updates and program invitations.
-            I can unsubscribe at any time. See <Link href="/privacy">Privacy</Link>.
+            I understand that I must confirm my email first and can unsubscribe at any time.
+            See <Link href="/privacy">Privacy</Link>.
           </span>
         </label>
         <button className="button button-dark" type="submit" disabled={status === "loading"}>
-          {status === "loading" ? "Joining..." : "Join the letter"}
+          {status === "loading" ? "Sending confirmation..." : "Join with double opt-in"}
         </button>
         {message ? <p className={`newsletter-status ${status}`}>{message}</p> : null}
       </form>

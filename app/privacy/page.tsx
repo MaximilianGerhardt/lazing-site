@@ -29,9 +29,10 @@ export default function PrivacyPage() {
         <h2>Newsletter</h2>
         <p>
           The newsletter form asks for an email address, a selected interest track,
-          explicit consent and a timestamped consent version. The form is prepared for
-          Resend contact storage when the backend key is configured. No newsletter
-          contact is created without active submission and consent.
+          explicit consent and a timestamped consent version. A Double Opt-In email is
+          required before the address is added to the newsletter segment. Pending
+          entries are used only to send the confirmation email. No newsletter is sent
+          without the confirmation click.
         </p>
         <h2>Consent categories</h2>
         <p>Necessary, Analytics, Media Embeds and Community.</p>
