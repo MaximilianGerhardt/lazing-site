@@ -4608,9 +4608,8 @@ summary {
   display: grid;
   place-items: center;
   padding: 0 var(--flow-stage-gutter) clamp(64px, 7vw, 104px);
-  margin-inline: calc(var(--flow-stage-gutter) * -1);
-  overflow-x: clip;
-  overflow-y: visible;
+  margin-inline: 0;
+  overflow: hidden;
 }
 
 .flow-story-card {
@@ -6255,10 +6254,27 @@ summary {
 
 .hidden-field {
   position: absolute;
-  left: -10000px;
+  left: 0;
+  top: 0;
   width: 1px;
+  min-width: 1px;
+  max-width: 1px;
   height: 1px;
   opacity: 0;
+  pointer-events: none;
+  clip-path: inset(50%);
+}
+
+.newsletter-form .hidden-field,
+.program-application-form .hidden-field {
+  inline-size: 1px !important;
+  block-size: 1px !important;
+  min-inline-size: 1px !important;
+  max-inline-size: 1px !important;
+  min-block-size: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  appearance: none;
 }
 
 @media (max-width: 900px) {

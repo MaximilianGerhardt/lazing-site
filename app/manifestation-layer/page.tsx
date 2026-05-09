@@ -99,7 +99,7 @@ export default function ManifestationLayerPage() {
       <ProgramHero
         eyebrow="Manifestation Layer"
         title="Interfaces should form around intention."
-        copy="The Manifestation Layer describes how a signal becomes a scoped system: field, lens, pack, manifestation, resolution and trace."
+        copy="Plain version: a message should not always stay a message. It can become the small working surface the moment needs: a plan, tracker, decision, workspace or trace."
         primary={{ href: "/#start-locally", label: "Start locally" }}
         secondary={{ href: "/developers", label: "Build on the layer" }}
         benefits={layerBenefits}

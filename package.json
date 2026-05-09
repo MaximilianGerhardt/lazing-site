@@ -40,5 +40,8 @@
     "eslint-config-next": "^16.2.6",
     "typescript": "^6.0.3",
     "wrangler": "^4.90.0"
+  },
+  "overrides": {
+    "postcss": "8.5.10"
   }
 }

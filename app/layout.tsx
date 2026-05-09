@@ -83,6 +83,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <Link href="/terms">Risk Notice</Link>
             <Link href="/license">License</Link>
             <Link href="/changelog">Build Notes</Link>
+            <Link href="/de">Deutsch</Link>
             <a href="/llms.txt">llms.txt</a>
           </nav>
         </footer>

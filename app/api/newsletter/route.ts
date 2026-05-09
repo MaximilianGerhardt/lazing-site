@@ -6,6 +6,12 @@ import {
 } from "@/lib/email/lazingNewsletter";
 import { site } from "@/lib/site";
 import { createNewsletterConfirmationToken } from "@/lib/newsletter/doiToken";
+import { contactPropertiesToValues } from "@/lib/newsletter/resendContact";
+import {
+  assertTrustedOrigin,
+  readJsonWithLimit,
+  submissionRateLimit,
+} from "@/lib/security/requestGuards";
 
 export const runtime = "nodejs";
 
@@ -28,13 +34,15 @@ function cleanText(value: unknown, fallback = "") {
 }
 
 export async function POST(request: Request) {
-  let payload: NewsletterPayload;
+  const originError = assertTrustedOrigin(request);
 
-  try {
-    payload = (await request.json()) as NewsletterPayload;
-  } catch {
-    return NextResponse.json({ message: "Invalid request." }, { status: 400 });
-  }
+  if (originError) return originError;
+
+  const body = await readJsonWithLimit<NewsletterPayload>(request, 2048);
+
+  if (!body.ok) return body.response;
+
+  const payload = body.data;
 
   if (payload.company) {
     return NextResponse.json({ message: "Thanks. Your request was received." });
@@ -55,6 +63,18 @@ export async function POST(request: Request) {
   if (!allowedTracks.has(track)) {
     return NextResponse.json({ message: "Invalid newsletter track." }, { status: 400 });
   }
+
+  const rateLimitError = submissionRateLimit({
+    request,
+    namespace: "newsletter",
+    email,
+    ipLimit: 12,
+    emailLimit: 3,
+    windowMs: 10 * 60 * 1000,
+    emailWindowMs: 60 * 60 * 1000,
+  });
+
+  if (rateLimitError) return rateLimitError;
 
   const apiKey = process.env.RESEND_API_KEY;
   const confirmationSecret = process.env.NEWSLETTER_CONFIRM_SECRET;
@@ -100,6 +120,7 @@ export async function POST(request: Request) {
       track,
       consent_text: consentText,
       consent_version: "lazing-newsletter-v1",
+      newsletter_status: "pending_doi",
       consent_at: "",
       doi_status: "pending",
       doi_requested_at: now,
@@ -121,9 +142,13 @@ export async function POST(request: Request) {
       );
     }
 
+    const existing = await resend.contacts.get({ email });
     const updated = await resend.contacts.update({
       email,
-      properties: contact.properties,
+      properties: {
+        ...(existing.data ? contactPropertiesToValues(existing.data.properties) : {}),
+        ...contact.properties,
+      },
     });
 
     if (updated.error) {

@@ -7,6 +7,7 @@ import {
 import type { ProgramRole } from "@/lib/program/foundingCircle";
 import { site } from "@/lib/site";
 import { verifyNewsletterConfirmationToken } from "@/lib/newsletter/doiToken";
+import { contactPropertiesToValues, contactProperty } from "@/lib/newsletter/resendContact";
 
 export const runtime = "nodejs";
 
@@ -61,26 +62,42 @@ export async function GET(request: Request) {
   if (payload.kind === "program") {
     const role = payload.programRole;
 
-    if (
-      !role ||
-      !allowedRoles.has(role) ||
-      !payload.programUseCase ||
-      !payload.programContribution
-    ) {
+    if (!role || !allowedRoles.has(role)) {
       return redirectProgram("invalid");
+    }
+
+    const existing = await resend.contacts.get({ email: payload.email });
+
+    if (existing.error) {
+      return redirectProgram("failed", role);
+    }
+
+    const existingProperties = existing.data.properties;
+    const programUseCase = contactProperty(existingProperties, "program_use_case");
+    const programContribution = contactProperty(existingProperties, "program_contribution");
+    const programLink = contactProperty(existingProperties, "program_link");
+    const programStatus = contactProperty(existingProperties, "program_status");
+
+    if (!programUseCase || !programContribution) {
+      return redirectProgram("invalid", role);
+    }
+
+    if (programStatus === "pending_review") {
+      return redirectProgram("confirmed", role);
     }
 
     const update = await resend.contacts.update({
       email: payload.email,
       unsubscribed: false,
       properties: {
+        ...contactPropertiesToValues(existingProperties),
         source: payload.source,
         track: payload.track,
         program_role: role,
         program_status: "pending_review",
-        program_use_case: payload.programUseCase,
-        program_contribution: payload.programContribution,
-        program_link: payload.programLink ?? "",
+        program_use_case: programUseCase,
+        program_contribution: programContribution,
+        program_link: programLink,
         program_source: payload.source,
         consent_text: programConsentText,
         consent_version: "lazing-founding-circle-v1",
@@ -127,9 +144,9 @@ export async function GET(request: Request) {
       const review = buildFoundingCircleReviewEmail({
         email: payload.email,
         role,
-        useCase: payload.programUseCase,
-        contribution: payload.programContribution,
-        link: payload.programLink,
+        useCase: programUseCase,
+        contribution: programContribution,
+        link: programLink,
         source: payload.source,
       });
 
@@ -150,14 +167,22 @@ export async function GET(request: Request) {
     return redirectProgram("confirmed", role);
   }
 
+  const existing = await resend.contacts.get({ email: payload.email });
+
+  if (existing.data && contactProperty(existing.data.properties, "newsletter_status") === "confirmed") {
+    return redirect("confirmed");
+  }
+
   const update = await resend.contacts.update({
     email: payload.email,
     unsubscribed: false,
     properties: {
+      ...(existing.data ? contactPropertiesToValues(existing.data.properties) : {}),
       source: payload.source,
       track: payload.track,
       consent_text: consentText,
       consent_version: "lazing-newsletter-v1",
+      newsletter_status: "confirmed",
       consent_at: now,
       doi_status: "confirmed",
       doi_requested_at: new Date(payload.issuedAt).toISOString(),

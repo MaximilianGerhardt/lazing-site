@@ -2,8 +2,14 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { buildFoundingCircleConfirmationEmail } from "@/lib/email/lazingNewsletter";
 import { createNewsletterConfirmationToken } from "@/lib/newsletter/doiToken";
+import { contactPropertiesToValues } from "@/lib/newsletter/resendContact";
 import { programRoleTracks, type ProgramRole } from "@/lib/program/foundingCircle";
 import { site } from "@/lib/site";
+import {
+  assertTrustedOrigin,
+  readJsonWithLimit,
+  submissionRateLimit,
+} from "@/lib/security/requestGuards";
 
 export const runtime = "nodejs";
 
@@ -33,13 +39,15 @@ function isProgramRole(value: string): value is ProgramRole {
 }
 
 export async function POST(request: Request) {
-  let payload: ProgramApplicationPayload;
+  const originError = assertTrustedOrigin(request);
 
-  try {
-    payload = (await request.json()) as ProgramApplicationPayload;
-  } catch {
-    return NextResponse.json({ message: "Invalid request." }, { status: 400 });
-  }
+  if (originError) return originError;
+
+  const body = await readJsonWithLimit<ProgramApplicationPayload>(request, 8192);
+
+  if (!body.ok) return body.response;
+
+  const payload = body.data;
 
   if (payload.company) {
     return NextResponse.json({ message: "Thanks. Your request was received." });
@@ -71,6 +79,18 @@ export async function POST(request: Request) {
   if (contribution.length < 12) {
     return NextResponse.json({ message: "Please describe what you can contribute." }, { status: 400 });
   }
+
+  const rateLimitError = submissionRateLimit({
+    request,
+    namespace: "program",
+    email,
+    ipLimit: 8,
+    emailLimit: 2,
+    windowMs: 10 * 60 * 1000,
+    emailWindowMs: 60 * 60 * 1000,
+  });
+
+  if (rateLimitError) return rateLimitError;
 
   const apiKey = process.env.RESEND_API_KEY;
   const confirmationSecret = process.env.NEWSLETTER_CONFIRM_SECRET;
@@ -106,9 +126,6 @@ export async function POST(request: Request) {
       expiresAt: nowMs + confirmationExpiryHours * 60 * 60 * 1000,
       nonce: crypto.randomUUID(),
       programRole: role,
-      programUseCase: useCase,
-      programContribution: contribution,
-      programLink: link,
     },
     confirmationSecret,
   );
@@ -149,9 +166,13 @@ export async function POST(request: Request) {
       );
     }
 
+    const existing = await resend.contacts.get({ email });
     const updated = await resend.contacts.update({
       email,
-      properties: contact.properties,
+      properties: {
+        ...(existing.data ? contactPropertiesToValues(existing.data.properties) : {}),
+        ...contact.properties,
+      },
     });
 
     if (updated.error) {
@@ -164,7 +185,6 @@ export async function POST(request: Request) {
 
   const confirmation = buildFoundingCircleConfirmationEmail({
     role,
-    useCase,
     confirmUrl: confirmUrl.toString(),
     expiresInHours: confirmationExpiryHours,
   });

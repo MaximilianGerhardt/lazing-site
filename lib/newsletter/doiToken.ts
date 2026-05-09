@@ -10,9 +10,6 @@ export type NewsletterConfirmationPayload = {
   expiresAt: number;
   nonce: string;
   programRole?: ProgramRole;
-  programUseCase?: string;
-  programContribution?: string;
-  programLink?: string;
 };
 
 const encoder = new TextEncoder();
@@ -60,7 +57,17 @@ export async function createNewsletterConfirmationToken(
 }
 
 export async function verifyNewsletterConfirmationToken(token: string, secret: string) {
-  const [body, signature] = token.split(".");
+  if (token.length > 4096) {
+    return null;
+  }
+
+  const parts = token.split(".");
+
+  if (parts.length !== 2) {
+    return null;
+  }
+
+  const [body, signature] = parts;
 
   if (!body || !signature) {
     return null;
@@ -90,7 +97,7 @@ export async function verifyNewsletterConfirmationToken(token: string, secret: s
 
     if (
       payload.kind === "program" &&
-      (!payload.programRole || !payload.programUseCase || !payload.programContribution)
+      !payload.programRole
     ) {
       return null;
     }

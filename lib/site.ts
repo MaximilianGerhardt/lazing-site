@@ -77,7 +77,7 @@ export const faqItems = [
   {
     question: "Does Lazing require Codex or Claude Code?",
     answer:
-      "No. Lazing is designed to connect to engines such as Codex, Claude Code, Ollama, OpenAI-compatible adapters, and local agents when you choose to enable them.",
+      "No. Codex, Claude Code, Ollama and local agents are optional engines. Lazing is the cockpit, scope and trace layer around them.",
   },
   {
     question: "Can I use Ollama locally?",
@@ -92,7 +92,7 @@ export const faqItems = [
   {
     question: "What is the Manifestation Layer?",
     answer:
-      "The Manifestation Layer is the concept behind turning intent into useful work surfaces. A response can become a plan, decision card, tracker, review panel, workspace, routine, or trace instead of remaining only text.",
+      "The Manifestation Layer is the concept behind turning intent into useful work surfaces. In plain words: an answer can become a plan, decision card, tracker, review panel, workspace or routine instead of remaining only text.",
   },
   {
     question: "What are Manifestation Packs?",
@@ -102,7 +102,7 @@ export const faqItems = [
   {
     question: "Is this a chatbot?",
     answer:
-      "No. Chat can be one input surface, but Lazing focuses on forming scoped systems and adaptive interfaces around the work.",
+      "No. Chat can be the starting point, but Lazing focuses on forming scoped systems and adaptive interfaces around the work.",
   },
   {
     question: "Can creators build on it?",

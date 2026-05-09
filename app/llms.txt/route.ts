@@ -50,6 +50,7 @@ AI models, agents and adapters can make mistakes. Lazing content is not legal, m
 
 Links:
 - Website: ${site.url}
+- German overview: ${site.url}/de
 - Runtime repository: ${site.repo}
 - Website repository: ${site.siteRepo}
 - Build notes: ${site.url}/changelog
@@ -71,6 +72,10 @@ Newsletter:
 Founding Circle:
 - Creator, Developer and Builder applications use Resend contacts plus manual review email.
 - The first reward model is status and access: founding badges, private build notes, early review calls and future showcase priority.
+
+German SEO direction:
+- /de is a separate German-language overview for people searching in everyday German.
+- It should explain Lazing as ein lokales KI-Kommandozentrum without mixing German copy into the English flagship page.
 `;
 
   return new Response(body, {

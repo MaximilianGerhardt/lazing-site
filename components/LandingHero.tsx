@@ -72,7 +72,7 @@ export function LandingHero() {
           The system adapts <span>to you.</span>
         </h1>
         <p className="hero-lede">
-          Not the other way around. Describe your intention and the right working system appears.
+          Describe the outcome. Lazing builds the working surface around it.
         </p>
         <div className="hero-actions" aria-label="Primary actions">
           <a className="button button-dark" href="#start-locally">›_ Start locally</a>
@@ -144,7 +144,7 @@ export function LandingHero() {
       </div>
 
       <div className="engine-dock" aria-label="Lazing engines">
-        <span>Connect when you&apos;re ready</span>
+        <span>Engines stay scoped</span>
         <strong><Image src="/brand/openai.svg" alt="" width={24} height={24} />Codex</strong>
         <strong><Image src="/brand/claude.svg" alt="" width={24} height={24} />Claude Code</strong>
         <strong><Image src="/brand/ollama.svg" alt="" width={24} height={24} />Ollama</strong>

@@ -56,9 +56,19 @@ verified. `RESEND_REPLY_TO_EMAIL` and `RESEND_UNSUBSCRIBE_URL` are optional.
 set, the program review email falls back to `RESEND_REPLY_TO_EMAIL` and then
 `info@p-a.llc`.
 
+Program application details are stored as pending Resend contact properties and are
+not embedded into Double Opt-In URLs. Confirmation tokens carry only the minimum
+state needed to verify the click.
+
+The public newsletter and program endpoints include same-origin checks, request-size
+limits and lightweight per-IP/per-email throttling before Resend sends. Keep a
+Cloudflare WAF or rate-limiting rule in front of these endpoints for production-grade
+abuse protection.
+
 ## Routes
 
 - `/`
+- `/de`
 - `/manifestation-layer`
 - `/developers`
 - `/creators`

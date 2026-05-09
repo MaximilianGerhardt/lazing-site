@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 
 const routes = [
   "",
+  "/de",
   "/manifestation-layer",
   "/developers",
   "/creators",

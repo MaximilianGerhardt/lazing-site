@@ -168,14 +168,14 @@ export default function CreatorsPage() {
       <ProgramHero
         eyebrow="Creator Program"
         title="Publish the method behind the content."
-        copy="The future creator does not only publish posts. They publish routines, workflows, lenses and expert tracks that help people get better outcomes."
+        copy="Your best method should become something people can run, not only remember. Lazing turns repeatable expertise into scoped systems with visible boundaries."
         primary={{ href: "#founding-circle", label: "Apply as Founding Creator" }}
         secondary={{ href: "/manifestation-layer", label: "See Manifestation Packs" }}
         benefits={creatorBenefits}
         visual={{
           kicker: "Creator value",
-          title: "Turn repeatable expertise into an audience system.",
-          copy: "The creator provides the method. Lazing shapes the surface.",
+          title: "Turn one repeatable outcome into a working surface.",
+          copy: "The creator provides the method. Lazing keeps the scope clear.",
           items: [
             { label: "Start", value: "Method + lens" },
             { label: "Create", value: "Pack + routine" },
@@ -209,7 +209,7 @@ export default function CreatorsPage() {
           <h2>Your audience should not have to reconstruct your method from memory.</h2>
           <p>
             Lazing can turn creator expertise into systems people run locally or on their VPS.
-            The creator provides the lens. The runtime keeps the scope.
+            The creator provides the lens. The runtime keeps the promise narrow enough to trust.
           </p>
         </div>
         <div className="program-grid">

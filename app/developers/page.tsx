@@ -128,14 +128,14 @@ export default function DevelopersPage() {
       <ProgramHero
         eyebrow="Developer Program"
         title="Build the layer between intention and working software."
-        copy="Lazing gives builders a local-first runtime for scoped agents, adaptive interfaces, reusable packs and traceable decisions. Bring the engines. Keep the system bounded."
+        copy="Codex, Claude Code and Ollama are engines. Lazing is the cockpit, scope and trace layer around them: local-first, bounded and built for real work."
         primary={{ href: "#founding-circle", label: "Apply as Founding Developer" }}
         secondary={{ href: "/manifestation-layer", label: "Read the layer" }}
         benefits={developerBenefits}
         visual={{
           kicker: "Builder value",
-          title: "Ship capability without surrendering scope.",
-          copy: "The runtime keeps authority while engines do useful work.",
+          title: "Use powerful engines without giving them the whole house.",
+          copy: "The runtime keeps authority while each engine does one bounded job.",
           items: [
             { label: "Authority", value: "Local/VPS host" },
             { label: "Memory", value: "Scoped fields" },
@@ -146,7 +146,7 @@ export default function DevelopersPage() {
 
       <section className="section value-section">
         <p className="eyebrow">Why Builders Care</p>
-        <h2>Useful power without the usual agent sprawl.</h2>
+        <h2>Useful agent power without the usual sprawl.</h2>
         <div className="value-grid">
           {developerValues.map((item) => {
             const Icon = item.icon;
@@ -190,8 +190,8 @@ lazing pack dev ./packs/product-launch`}</pre>
           <p className="eyebrow">System Stack</p>
           <h2>The runtime is not another SaaS dashboard.</h2>
           <p>
-            It is a host for bounded work: fields, packs, adapters, confirmations and trace.
-            Every object has a reason to exist and a scope where it belongs.
+            It is the control layer for bounded work: fields, packs, adapters, confirmations
+            and trace. Every object has a reason to exist and a scope where it belongs.
           </p>
         </div>
         <div className="program-grid">

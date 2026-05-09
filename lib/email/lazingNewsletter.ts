@@ -42,7 +42,6 @@ type ConfirmationEmailOptions = {
 
 type ProgramConfirmationEmailOptions = {
   role: ProgramRole;
-  useCase: string;
   confirmUrl: string;
   expiresInHours?: number;
 };
@@ -232,17 +231,15 @@ export function buildLazingWelcomeEmail({ track, unsubscribeUrl }: WelcomeEmailO
 
 export function buildFoundingCircleConfirmationEmail({
   role,
-  useCase,
   confirmUrl,
   expiresInHours = 48,
 }: ProgramConfirmationEmailOptions) {
   const roleLabel = programRoleLabels[role];
   const roleNote = programRoleNotes[role];
   const safeConfirmUrl = escapeHtml(confirmUrl);
-  const safeUseCase = escapeHtml(useCase);
   const body = `
     <h1 style="margin:18px 0 0;font-size:46px;line-height:1.02;font-weight:650;letter-spacing:-.02em;color:#0d0d14;">Confirm your Founding Circle application.</h1>
-    <p style="margin:20px 0 0;font-size:19px;line-height:1.45;color:#5f6270;">One clear yes before we keep your attention. The first Lazing cohort is curated, quiet and built around useful work.</p>
+    <p style="margin:20px 0 0;font-size:19px;line-height:1.45;color:#5f6270;">One clear yes before we keep your attention. Your application details stay out of the confirmation link.</p>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:30px 0 0;border-collapse:separate;border-spacing:0 10px;">
       <tr>
         <td style="border:1px solid rgba(13,13,20,.07);border-radius:18px;background:rgba(255,255,255,.72);padding:16px 18px;">
@@ -253,8 +250,7 @@ export function buildFoundingCircleConfirmationEmail({
       </tr>
       <tr>
         <td style="border:1px solid rgba(13,13,20,.07);border-radius:18px;background:rgba(255,255,255,.58);padding:16px 18px;">
-          <div style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#7a7d89;">Use case</div>
-          <div style="margin-top:8px;font-size:15px;line-height:1.45;color:#5f6270;">${safeUseCase}</div>
+          <div style="font-size:15px;line-height:1.45;color:#5f6270;">No application review before this click. The first Lazing cohort is curated, quiet and built around useful work.</div>
         </td>
       </tr>
     </table>
@@ -274,9 +270,6 @@ export function buildFoundingCircleConfirmationEmail({
     "",
     `Role: ${roleLabel}`,
     roleNote,
-    "",
-    "Use case:",
-    useCase,
     "",
     "Confirm:",
     confirmUrl,

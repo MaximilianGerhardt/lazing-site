@@ -24,22 +24,22 @@ const flow = [
     copy: "Personal, organization, client, documents, credentials and boundaries shape what should happen next.",
   },
   {
-    label: "Skill",
-    title: "Reusable expertise enters the moment.",
-    copy: "A skill brings the domain logic that an expert would normally carry in their head.",
+    label: "Method",
+    title: "A proven method enters the moment.",
+    copy: "The system can use the logic an expert would normally carry in their head.",
   },
   {
-    label: "SOP",
+    label: "Process",
     title: "Quality becomes a repeatable process.",
     copy: "The system follows the method, checks the missing inputs and keeps work from becoming vague.",
   },
   {
-    label: "Swarm",
-    title: "Agents can plan, build, compare and check.",
-    copy: "Codex, Claude Code, Ollama or local agents can work in parallel without owning the whole context.",
+    label: "Engines",
+    title: "Agents do the work they are good at.",
+    copy: "Codex, Claude Code, Ollama or local agents can help without owning the whole context.",
   },
   {
-    label: "Manifestation",
+    label: "Surface",
     title: "The answer becomes an interface.",
     copy: "A plan, tracker, decision card, workflow, document or workspace appears when the work needs it.",
   },
@@ -123,6 +123,24 @@ const creatorExamples = [
   "An educator turns a method into a learning journey",
 ];
 
+const clarityCards = [
+  {
+    title: "Not another chatbot",
+    copy: "Chat is one input. The output can be a plan, tracker, decision, workspace or trace.",
+    className: "bento-card bento-wide",
+  },
+  {
+    title: "Engines are not the system",
+    copy: "Codex, Claude Code and Ollama do useful work. Lazing keeps scope, surface and memory honest.",
+    className: "bento-card",
+  },
+  {
+    title: "A method you can run",
+    copy: "Creator expertise becomes a pack people use, not a post people save and forget.",
+    className: "bento-card bento-soft",
+  },
+];
+
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -170,11 +188,10 @@ export default function Home() {
       <section className="section intent-section">
         <ScrollReveal>
           <p className="eyebrow">From Intent To Impact</p>
-          <h2>You should not have to learn the system. The system should learn what you mean.</h2>
+          <h2>Tell Lazing what should happen. It creates the small system to make it happen.</h2>
           <p className="section-lede">
-            Lazing begins where classical software usually makes you work: before the menu,
-            before the dashboard, before the right structure is obvious. You describe the goal.
-            Lazing forms the working system around it.
+            Lazing begins before the menu, before the dashboard and before the right structure
+            is obvious. You describe the outcome. The system forms around the work.
           </p>
         </ScrollReveal>
         <div className="flow-story" data-flow-story aria-label="Manifestation flow">
@@ -202,6 +219,25 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section split-section clarity-section">
+        <ScrollReveal className="section-copy">
+          <p className="eyebrow">Plain Difference</p>
+          <h2>Codex and Claude are engines. Lazing is the cockpit, scope and flight recorder.</h2>
+          <p>
+            The engines can reason, code and compare. Lazing decides which field they may
+            touch, which surface should appear and what must be confirmed before work continues.
+          </p>
+        </ScrollReveal>
+        <div className="bento-grid manifestation-bento clarity-grid">
+          {clarityCards.map((item) => (
+            <article className={item.className} key={item.title}>
+              <span>{item.title}</span>
+              <p>{item.copy}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -275,7 +311,7 @@ export default function Home() {
           <p className="eyebrow">Skills + SOPs</p>
           <h2>Expertise becomes executable.</h2>
           <p className="section-lede">
-            Skills hold reusable expertise. SOPs hold repeatable quality. Manifestations turn
+            Skills hold reusable expertise. Processes hold repeatable quality. Manifestations turn
             both into interactive work: not just something to read, but something to run.
           </p>
         </ScrollReveal>
@@ -314,8 +350,8 @@ cd lazing
           <p className="eyebrow">For Developers</p>
           <h2>Many minds. One decision.</h2>
           <p>
-            Codex, Claude Code, Ollama and local agents can plan, build, compare,
-            test and reach consensus without dissolving the boundary between fields.
+            Codex, Claude Code, Ollama and local agents are engines. Lazing keeps them
+            scoped, gives them the right surface and records what happened.
           </p>
           <div className="cta-row">
             <a className="button button-dark" href={site.repo}>View GitHub</a>
@@ -334,7 +370,7 @@ cd lazing
           <p className="eyebrow">For Creators</p>
           <h2>Creators should publish methods, not only content.</h2>
           <p>
-            A creator can turn repeatable expertise into skills, SOPs, routines and
+            A creator can turn repeatable expertise into skills, processes, routines and
             working interfaces that help people get better outcomes.
           </p>
           <div className="cta-row">
