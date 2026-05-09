@@ -1679,9 +1679,13 @@ details {
     font-size: 12px;
   }
 
+  .cookie-panel:not(.is-expanded) .cookie-selected-button {
+    display: none;
+  }
+
   .cookie-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.8fr 1.05fr 1fr;
     gap: 8px;
   }
 
@@ -1693,6 +1697,14 @@ details {
   }
 
   .cookie-actions .button-dark {
+    grid-column: auto;
+  }
+
+  .cookie-panel.is-expanded .cookie-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cookie-panel.is-expanded .cookie-actions .button-dark {
     grid-column: 1 / -1;
   }
 

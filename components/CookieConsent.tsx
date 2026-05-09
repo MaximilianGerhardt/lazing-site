@@ -91,25 +91,25 @@ export function CookieConsent() {
 
       <div className="cookie-actions">
         <button
-          className="button button-quiet"
+          className="button button-quiet cookie-detail-button"
           type="button"
           onClick={() => setDetailsOpen((current) => !current)}
           aria-expanded={detailsOpen}
         >
           {detailsOpen ? "Hide details" : "Details"}
         </button>
-        <button className="button button-quiet" type="button" onClick={() => persist(selected)}>
+        <button className="button button-quiet cookie-selected-button" type="button" onClick={() => persist(selected)}>
           Allow selected
         </button>
         <button
-          className="button button-quiet"
+          className="button button-quiet cookie-necessary-button"
           type="button"
           onClick={() => persist({ analytics: false, media: false, community: false })}
         >
           Necessary only
         </button>
         <button
-          className="button button-dark"
+          className="button button-dark cookie-all-button"
           type="button"
           onClick={() => persist({ analytics: true, media: true, community: true })}
         >
