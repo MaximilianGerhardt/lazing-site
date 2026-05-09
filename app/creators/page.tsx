@@ -1,5 +1,17 @@
 import type { Metadata } from "next";
-import { BadgeCheck, ChartSpline, HeartHandshake, PanelsTopLeft, Sparkles, UsersRound } from "lucide-react";
+import {
+  BadgeCheck,
+  ChartSpline,
+  CheckCircle2,
+  ClipboardList,
+  Compass,
+  HeartHandshake,
+  PanelsTopLeft,
+  ShieldCheck,
+  Sparkles,
+  SquareStack,
+  UsersRound,
+} from "lucide-react";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { ProgramHero } from "@/components/ProgramHero";
 import { SchemaJsonLd } from "@/components/SchemaJsonLd";
@@ -76,6 +88,43 @@ const examples = [
   ["Agency", "A strategist ships client onboarding systems with briefs, decisions and launch trace."],
   ["Education", "A teacher ships a learning journey that adapts to goals, gaps and weekly review."],
   ["Software", "A developer ships code review routines, benchmark battles and release checklists."],
+];
+
+const blueprint = [
+  ["Method", "The repeatable expert routine: what happens first, what changes the path, what good looks like."],
+  ["Lens", "The contextual view: beginner, advanced, rehab-safe, agency client, product launch, exam prep."],
+  ["Inputs", "The minimum data needed before the system can act responsibly."],
+  ["Risks", "Claims, sensitive data, medical/legal/financial boundaries and places where confirmation is required."],
+  ["Surfaces", "The cards, trackers, reviews, decision prompts and timelines the audience will actually use."],
+  ["Trace", "What changed, why it changed, who approved it and what should be remembered next time."],
+];
+
+const packExamples = [
+  {
+    title: "Nutrition Reset",
+    audience: "Fitness creator",
+    outcome: "A private meal log, weekly review and decision prompts around habits, not shame.",
+    details: ["Personal Field", "Risk-aware check-ins", "Progress trace"],
+  },
+  {
+    title: "Client Launch OS",
+    audience: "Agency creator",
+    outcome: "Brief, assets, positioning choices and launch tasks become one scoped client workspace.",
+    details: ["Bridge-ready", "Resolution cards", "Client-safe trace"],
+  },
+  {
+    title: "Learning Sprint",
+    audience: "Educator",
+    outcome: "The learner gets goals, weak spots, drills and a weekly reflection system.",
+    details: ["Observation lens", "Adaptive routine", "Review loop"],
+  },
+];
+
+const onboarding = [
+  ["01", "Submit the method", "A short description of the repeatable outcome and who it helps."],
+  ["02", "Shape the lens", "Define what context changes the right answer and which data is needed."],
+  ["03", "Review the risks", "Mark claims, boundaries, sensitive fields and required confirmations."],
+  ["04", "Pilot the pack", "Run with early builders before any marketplace story begins."],
 ];
 
 const principles = [
@@ -171,6 +220,44 @@ export default function CreatorsPage() {
         </div>
       </section>
 
+      <section className="section creator-blueprint-section">
+        <div className="section-copy">
+          <p className="eyebrow">Pack Blueprint</p>
+          <h2>A creator pack is not a template. It is a scoped method.</h2>
+          <p>
+            Every pack should make expertise usable without pretending to replace the expert.
+            The structure stays simple enough to trust and specific enough to work.
+          </p>
+        </div>
+        <div className="blueprint-grid" aria-label="Creator pack blueprint">
+          {blueprint.map(([title, copy]) => (
+            <article className="blueprint-card" key={title}>
+              <span>{title}</span>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section pack-showcase-section">
+        <p className="eyebrow">First Pack Directions</p>
+        <h2>The first creator packs should feel useful before they feel commercial.</h2>
+        <div className="pack-showcase-grid">
+          {packExamples.map((pack) => (
+            <article className="pack-case-card" key={pack.title}>
+              <span>{pack.audience}</span>
+              <h3>{pack.title}</h3>
+              <p>{pack.outcome}</p>
+              <div>
+                {pack.details.map((detail) => (
+                  <em key={detail}>{detail}</em>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section program-split">
         <div>
           <p className="eyebrow">Trust Model</p>
@@ -188,20 +275,43 @@ export default function CreatorsPage() {
       </section>
 
       <section className="section creator-path">
-        <div className="path-card">
-          <span>01</span>
-          <h3>Describe the method</h3>
-          <p>What do you repeatedly help people do better?</p>
-        </div>
-        <div className="path-card">
-          <span>02</span>
-          <h3>Define the lens</h3>
-          <p>What context changes the right answer?</p>
-        </div>
-        <div className="path-card">
-          <span>03</span>
-          <h3>Ship the pack</h3>
-          <p>The audience runs a scoped system, not another generic app.</p>
+        {onboarding.map(([step, title, copy]) => (
+          <div className="path-card" key={step}>
+            <span>{step}</span>
+            <h3>{title}</h3>
+            <p>{copy}</p>
+          </div>
+        ))}
+      </section>
+
+      <section className="section creator-quality-section">
+        <article>
+          <ShieldCheck size={30} strokeWidth={1.6} />
+          <p className="eyebrow">Quality Bar</p>
+          <h2>No pack should make an expert claim it cannot trace.</h2>
+          <p>
+            Creator systems need taste and restraint: clear outcomes, explicit boundaries,
+            privacy-aware fields and a visible way to reject or adjust a recommendation.
+          </p>
+        </article>
+        <div className="quality-list" aria-label="Creator pack quality checks">
+          {[
+            [Compass, "Narrow promise", "One outcome people can understand before they run it."],
+            [ClipboardList, "Required context", "The pack asks only for data it needs now."],
+            [CheckCircle2, "Human decision", "Sensitive steps stop for approval instead of pretending certainty."],
+            [SquareStack, "Reusable surface", "The result becomes a system, tracker, decision or routine."],
+          ].map(([Icon, title, copy]) => {
+            const QualityIcon = Icon as typeof Compass;
+            return (
+              <article key={title as string}>
+                <QualityIcon size={20} strokeWidth={1.7} />
+                <div>
+                  <strong>{title as string}</strong>
+                  <span>{copy as string}</span>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 

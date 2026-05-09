@@ -14,6 +14,7 @@ export function MobileNav() {
         <Link href="/developers">Developers</Link>
         <Link href="/creators">Creators</Link>
         <Link href="/community">Community</Link>
+        <Link href="/changelog">Build notes</Link>
         <a href={site.repo}>GitHub</a>
         <Link className="mobile-nav-cta" href="/#start-locally">Get Lazing</Link>
       </nav>

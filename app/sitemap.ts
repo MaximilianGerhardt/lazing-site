@@ -7,6 +7,7 @@ const routes = [
   "/developers",
   "/creators",
   "/community",
+  "/changelog",
   "/privacy",
   "/imprint",
   "/license",

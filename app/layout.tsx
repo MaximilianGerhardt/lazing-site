@@ -62,6 +62,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <Link href="/manifestation-layer">Docs</Link>
             <Link href="/developers">Developers</Link>
             <Link href="/creators">Creators</Link>
+            <Link href="/changelog">Build Notes</Link>
             <a href={site.repo}>GitHub</a>
             <Link className="nav-cta" href="/#start-locally">Get Lazing</Link>
           </nav>
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <Link href="/privacy">Privacy</Link>
             <Link href="/imprint">Imprint</Link>
             <Link href="/license">License</Link>
+            <Link href="/changelog">Build Notes</Link>
             <a href="/llms.txt">llms.txt</a>
           </nav>
         </footer>

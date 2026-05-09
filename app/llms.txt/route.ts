@@ -38,6 +38,8 @@ Adapters:
 
 Creator and community direction:
 Creators can turn repeatable expertise into methods, routines, workflows, lenses, templates and expert tracks. The first story is empowerment; marketplace features can come later.
+Creator packs are described through a blueprint: method, lens, inputs, risks, surfaces and trace.
+Community participation is organized around runners, pack authors, reviewers and maintainers.
 
 Privacy direction:
 Lazing is local-first and designed with European privacy expectations in mind. No analytics should load before consent on this website. Sensitive data belongs in scoped fields by default.
@@ -46,6 +48,7 @@ Links:
 - Website: ${site.url}
 - Runtime repository: ${site.repo}
 - Website repository: ${site.siteRepo}
+- Build notes: ${site.url}/changelog
 
 Developer program:
 - Builders can create adapters, Manifestation Packs, trace tooling, local/VPS runtime integrations, benchmark flows and documentation.
@@ -56,7 +59,7 @@ Creator program:
 - The first story is empowerment and audience outcomes, not monetization.
 
 Newsletter:
-- The site includes a DSGVO-aware newsletter form with explicit consent.
+- The site includes a DSGVO-aware newsletter form with Double Opt-In.
 - Resend is prepared as the backend via RESEND_API_KEY plus optional segment/topic IDs.
 `;
 
