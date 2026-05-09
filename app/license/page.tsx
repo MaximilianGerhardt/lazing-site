@@ -51,7 +51,7 @@ export default function LicensePage() {
         <h2>Risk and liability notes</h2>
         <p>
           The full AI, runtime, adapter and self-hosting risk notes are available under{" "}
-          <Link href="/terms">Nutzungs- und Risikohinweise</Link>.
+          <Link href="/terms">Risk Notice</Link>.
         </p>
       </section>
     </main>

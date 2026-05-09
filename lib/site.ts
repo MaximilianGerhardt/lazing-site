@@ -19,7 +19,7 @@ export const site = {
     "Codex Claude Code Ollama",
     "mobile-first AI interface",
     "scoped AI memory",
-    "DSGVO AI tool",
+    "GDPR AI tool",
   ],
 };
 

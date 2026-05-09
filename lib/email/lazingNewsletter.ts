@@ -142,7 +142,7 @@ export function buildLazingConfirmationEmail({
   ].join("\n");
 
   return {
-    subject: "Nur noch ein Schritt: Lazing Letter bestätigen",
+    subject: "One step left: confirm the Lazing Letter",
     html,
     text,
   };

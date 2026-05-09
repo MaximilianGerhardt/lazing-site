@@ -4,10 +4,10 @@ import { pageMetadata } from "@/lib/site";
 
 export const metadata = {
   ...pageMetadata({
-  title: "Confirm Your Lazing Letter",
-  description:
-    "One clear step remains: confirm your Lazing newsletter signup by email. No newsletter is sent before explicit consent.",
-  path: "/newsletter/check-email",
+    title: "Confirm Your Lazing Letter",
+    description:
+      "One clear step remains: confirm your Lazing newsletter signup by email. No newsletter is sent before explicit consent.",
+    path: "/newsletter/check-email",
   }),
   robots: { index: false, follow: false },
 };
@@ -25,16 +25,15 @@ export default function NewsletterCheckEmailPage() {
             <MailCheck size={28} />
           </div>
           <p className="eyebrow">Double opt-in</p>
-          <h1>Nur noch ein Schritt.</h1>
+          <h1>One step left.</h1>
           <p>
-            Wir haben dir eine Bestätigungsmail geschickt. Lazing startet ruhig:
-            kein Newsletter ohne klares Ja, keine versteckte Zustimmung, keine
-            unnötigen Signale.
+            We sent you a confirmation email. Lazing starts quietly: no newsletter
+            without a clear yes, no hidden consent, no unnecessary signals.
           </p>
           <div className="confirmation-proof">
             <span>
               <ShieldCheck size={16} />
-              Datenschutz ernst genommen
+              Privacy taken seriously
             </span>
             <span>
               <Sparkles size={16} />

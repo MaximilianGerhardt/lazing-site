@@ -4921,7 +4921,7 @@ summary {
   }
 }
 
-/* Program pages and DSGVO-safe newsletter conversion layer. */
+/* Program pages and GDPR-aware newsletter conversion layer. */
 .program-page {
   overflow-x: hidden;
 }

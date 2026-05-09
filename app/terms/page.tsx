@@ -3,9 +3,9 @@ import Link from "next/link";
 import { pageMetadata, site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Nutzungs- und Risikohinweise - Lazing",
+  title: "Risk Notice - Lazing",
   description:
-    "Nutzungs-, Risiko- und Haftungshinweise fuer Lazing, KI-Ausgaben, lokale Runtime, Agenten, Packs und externe Adapter.",
+    "Use, risk and liability notes for Lazing, AI outputs, local runtime, agents, packs and external adapters.",
   path: "/terms",
 });
 
@@ -14,114 +14,107 @@ export default function TermsPage() {
     <main className="subpage legal-page">
       <section className="subpage-hero">
         <p className="eyebrow">Risk Notice</p>
-        <h1>AI kann helfen. Sie kann sich auch irren.</h1>
+        <h1>AI can help. It can also be wrong.</h1>
         <p>
-          Lazing soll Absichten in brauchbare Systeme verwandeln. Das macht Verantwortung
-          nicht kleiner. Es macht sie sichtbarer: pruefen, bestaetigen, begrenzen.
+          Lazing is meant to turn intentions into useful systems. That does not remove
+          responsibility. It makes responsibility visible: review, confirm, limit.
         </p>
       </section>
 
       <section className="section prose-section">
-        <h2>Geltungsbereich</h2>
+        <h2>Scope</h2>
         <p>
-          Diese Hinweise gelten fuer die oeffentliche Lazing Website, die beschriebenen
-          Konzepte, Newsletter, Community-Programme, Creator-Programme, Manifestation
-          Packs, Dokumentation, Beispielcode und Verweise auf die lokale oder
-          selbst-gehostete Lazing Runtime.
+          These notes apply to the public Lazing website, described concepts, newsletter,
+          community programs, creator programs, Manifestation Packs, documentation,
+          example code and references to the local or self-hosted Lazing runtime.
         </p>
 
-        <h2>Kein produktiver Sicherheits-, Rechts-, Medizin- oder Finanzdienst</h2>
+        <h2>No professional advice or production clearance</h2>
         <p>
-          Lazing stellt keine Rechtsberatung, medizinische Beratung, Finanzberatung,
-          Steuerberatung, Sicherheitsfreigabe, Compliance-Pruefung oder professionelle
-          Einzelfallberatung dar. Inhalte, Antworten, Manifestationen, Plaene,
-          Entscheidungskarten, Routinen und Workflows sind Ausgangspunkte. Sie muessen
-          vor jeder realen Nutzung fachlich und sachlich geprueft werden.
+          Lazing does not provide legal, medical, financial, tax, security, compliance or
+          professional case-specific advice. Content, answers, manifestations, plans,
+          decision cards, routines and workflows are starting points. They must be
+          reviewed before real-world use.
         </p>
 
-        <h2>KI-Fehler und Modellgrenzen</h2>
+        <h2>AI errors and model limits</h2>
         <p>
-          KI-Modelle koennen halluzinieren, Quellen falsch verstehen, veraltete
-          Informationen verwenden, Risiken uebersehen, Befehle falsch ableiten,
-          Anforderungen unvollstaendig erfassen oder Ergebnisse erzeugen, die plausibel
-          klingen und trotzdem falsch sind. Lazing kann solche Systeme nur strukturieren,
-          eingrenzen und nachvollziehbarer machen. Eine Garantie fuer Richtigkeit,
-          Vollstaendigkeit, Sicherheit oder Eignung entsteht dadurch nicht.
+          AI models can hallucinate, misunderstand sources, use outdated information,
+          miss risks, infer unsafe commands, capture requirements incompletely or produce
+          outputs that sound plausible while still being wrong. Lazing can structure,
+          scope and trace such systems. It does not guarantee correctness, completeness,
+          safety or suitability.
         </p>
 
-        <h2>Lokale Runtime und Selbsthosting</h2>
+        <h2>Local runtime and self-hosting</h2>
         <p>
-          Wer Lazing lokal, auf einem VPS, in einem privaten Netzwerk oder in einer
-          Organisation betreibt, ist fuer Installation, Konfiguration, Updates, Backups,
-          Zugriffsschutz, Schluessel, Credentials, Adapter, Datenbanken,
-          Netzwerkfreigaben und ausgefuehrte Befehle selbst verantwortlich. Vor
-          produktiver Nutzung sollten Berechtigungen eng begrenzt, Daten gesichert und
-          Ausgaben nachvollziehbar geprueft werden.
+          Anyone running Lazing locally, on a VPS, inside a private network or inside an
+          organization is responsible for installation, configuration, updates, backups,
+          access control, keys, credentials, adapters, databases, network exposure and
+          executed commands. Before production use, permissions should be tightly scoped,
+          data should be backed up and outputs should be reviewed.
         </p>
 
-        <h2>Agenten, Adapter und Ausfuehrung</h2>
+        <h2>Agents, adapters and execution</h2>
         <p>
-          Verbundene Werkzeuge wie Codex, Claude Code, Ollama, lokale Modelle,
-          OpenAI-kompatible Adapter, Shell-Werkzeuge, Browser-Automation oder andere
-          Engines koennen Dateien veraendern, Daten verarbeiten, externe Dienste
-          ansprechen oder Aktionen vorbereiten. Nutzerinnen und Nutzer muessen vor der
-          Ausfuehrung verstehen, was ein Agent tun darf, welche Daten betroffen sind und
-          welche Folgen eintreten koennen.
+          Connected tools such as Codex, Claude Code, Ollama, local models,
+          OpenAI-compatible adapters, shell tools, browser automation or other engines
+          may change files, process data, contact external services or prepare actions.
+          Users must understand what an agent is allowed to do, which data is affected
+          and what consequences could follow before execution.
         </p>
 
-        <h2>Manifestation Packs und Creator-Inhalte</h2>
+        <h2>Manifestation Packs and creator content</h2>
         <p>
-          Packs, Lenses, SOPs, Vorlagen, Expert Tracks und Community-Beitraege koennen
-          von Dritten stammen oder fachliche Annahmen enthalten. Sie sind keine Garantie
-          fuer ein bestimmtes Ergebnis. Creator und Pack-Autorinnen muessen ihre Methoden
-          verantwortungsvoll beschreiben; Nutzerinnen und Nutzer muessen sie auf ihren
-          Kontext, ihre Risiken und ihre rechtlichen Anforderungen pruefen.
+          Packs, lenses, SOPs, templates, expert tracks and community contributions may
+          come from third parties or contain domain assumptions. They are not a guarantee
+          of any specific outcome. Creators and pack authors should describe their
+          methods responsibly; users must check them against their context, risks and
+          legal requirements.
         </p>
 
-        <h2>Keine Hochrisiko-Nutzung ohne eigene Freigabe</h2>
+        <h2>No high-risk use without independent approval</h2>
         <p>
-          Lazing ist nicht dafuer bestimmt, ohne gesonderte menschliche Pruefung in
-          Bereichen eingesetzt zu werden, in denen Fehler erhebliche Schaeden verursachen
-          koennen. Dazu gehoeren insbesondere Gesundheit, Recht, Finanzen, Personal,
-          kritische Infrastruktur, Sicherheit, Produktionsanlagen, Minderjaehrige,
-          Notfallentscheidungen und sonstige sensible oder hochriskante Kontexte.
+          Lazing is not intended to be used without separate human review in areas where
+          errors could cause significant harm. This includes health, law, finance, human
+          resources, critical infrastructure, safety, production systems, minors,
+          emergency decisions and other sensitive or high-risk contexts.
         </p>
 
-        <h2>Haftungsbegrenzung</h2>
+        <h2>Liability limitation</h2>
         <p>
-          Die Nutzung erfolgt, soweit gesetzlich zulaessig, auf eigenes Risiko. Eine
-          Haftung fuer mittelbare Schaeden, Folgeschaeden, entgangenen Gewinn,
-          Datenverlust, Betriebsunterbrechung, fehlerhafte KI-Ausgaben, ungepruefte
-          Automationen, falsch konfigurierte Adapter oder selbst ausgefuehrte Befehle
-          wird im gesetzlich zulaessigen Umfang ausgeschlossen.
+          Use is, to the extent legally permitted, at your own risk. Liability for
+          indirect damage, consequential damage, lost profits, data loss, business
+          interruption, incorrect AI outputs, unreviewed automations, misconfigured
+          adapters or commands executed by users is excluded to the extent legally
+          permitted.
         </p>
         <p>
-          Dieser Hinweis beschraenkt keine Haftung, die nach zwingendem Recht nicht
-          ausgeschlossen oder begrenzt werden darf, insbesondere nicht bei Vorsatz, grober
-          Fahrlaessigkeit, Verletzung von Leben, Koerper oder Gesundheit oder bei
-          zwingenden gesetzlichen Anspruechen.
-        </p>
-
-        <h2>Open Source und keine Gewaehrleistung</h2>
-        <p>
-          Der Runtime-Code wird ueber das Projekt-Repository bereitgestellt:{" "}
-          <a href={site.repo}>{site.repo}</a>. Soweit eine Open-Source-Lizenz gilt,
-          bleiben deren Bedingungen massgeblich. Beispielcode, Dokumentation und
-          Entwuerfe werden ohne Zusage bereitgestellt, dass sie fehlerfrei, sicher,
-          dauerhaft verfuegbar oder fuer einen bestimmten Zweck geeignet sind.
+          Nothing in this notice limits liability that cannot be excluded or limited
+          under mandatory law, including liability for intent, gross negligence, injury to
+          life, body or health, or mandatory statutory claims.
         </p>
 
-        <h2>Verantwortliche Nutzung</h2>
+        <h2>Open source and no warranty</h2>
         <p>
-          Gute Systeme fragen nach Grenzen. Nutze Lazing mit kleinen Scopes, klaren
-          Freigaben, nachvollziehbaren Traces, Backups, menschlicher Pruefung und
-          besonderer Vorsicht bei sensiblen Daten. Wenn eine Entscheidung wichtig ist,
-          gehoert ein Mensch mit Verantwortung in den Loop.
+          Runtime code is provided through the project repository:{" "}
+          <a href={site.repo}>{site.repo}</a>. Where an open-source license applies, that
+          license controls. Example code, documentation and previews are provided without
+          any promise that they are error-free, secure, permanently available or fit for a
+          particular purpose.
         </p>
 
-        <h2>Kontakt</h2>
+        <h2>Responsible use</h2>
         <p>
-          Anbieterangaben und Kontakt stehen im <Link href="/imprint">Impressum</Link>.
+          Good systems ask for boundaries. Use Lazing with small scopes, clear approvals,
+          traceable decisions, backups, human review and special care around sensitive
+          data. If a decision matters, a responsible human belongs in the loop.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Provider information and contact details are available in the{" "}
+          <Link href="/imprint">Imprint</Link>.
         </p>
       </section>
     </main>

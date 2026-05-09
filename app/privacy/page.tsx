@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/site";
 export const metadata: Metadata = pageMetadata({
   title: "Privacy - Lazing",
   description:
-    "DSGVO-aware privacy information for Lazing. No analytics are loaded before consent.",
+    "GDPR-aware privacy information for Lazing. No analytics are loaded before consent.",
   path: "/privacy",
 });
 
@@ -13,17 +13,17 @@ export default function PrivacyPage() {
     <main className="subpage legal-page">
       <section className="subpage-hero">
         <p className="eyebrow">Privacy</p>
-        <h1>Der erste Besuch bleibt ruhig.</h1>
+        <h1>The first visit stays quiet.</h1>
         <p>
-          Lazing ist so angelegt, dass notwendige Funktionen zuerst kommen und optionale
-          Signale erst nach Zustimmung geladen werden.
+          Lazing is designed so necessary functions come first and optional signals are
+          loaded only after consent.
         </p>
       </section>
       <section className="section prose-section">
-        <h2>Verantwortlicher</h2>
+        <h2>Controller</h2>
         <p>
           Maximilian Gerhardt, c/o Impressumservice Dein-Impressum, Stettiner Straße 41,
-          35410 Hungen, Deutschland. Kontakt:{" "}
+          35410 Hungen, Germany. Contact:{" "}
           <a href="mailto:info@p-a.llc">info@p-a.llc</a>.
         </p>
 

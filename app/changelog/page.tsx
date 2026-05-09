@@ -34,7 +34,7 @@ const notes = [
   {
     date: "Now",
     title: "Public site and DOI newsletter",
-    copy: "The website now has the Lazing brand layer, program pages, DSGVO-friendly consent and Double Opt-In newsletter flow.",
+    copy: "The website now has the Lazing brand layer, program pages, GDPR-aware consent and Double Opt-In newsletter flow.",
     tags: ["Website", "Privacy", "Newsletter"],
   },
   {

@@ -64,7 +64,7 @@ Creator program:
 - The first story is empowerment and audience outcomes, not monetization.
 
 Newsletter:
-- The site includes a DSGVO-aware newsletter form with Double Opt-In.
+- The site includes a GDPR-aware newsletter form with Double Opt-In.
 - Resend is prepared as the backend via RESEND_API_KEY plus optional segment/topic IDs.
 `;
 
